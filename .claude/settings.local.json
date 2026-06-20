@@ -19,7 +19,14 @@
       "WebFetch(domain:toitureco974.com)",
       "PowerShell(New-Item *)",
       "WebFetch(domain:pixabay.com)",
-      "WebFetch(domain:www.pexels.com)"
+      "WebFetch(domain:www.pexels.com)",
+      "PowerShell(git *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main 2>&1)",
+      "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages project list 2>&1)",
+      "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deployment list --project-name=miraux-reunion 2>&1)"
     ]
   }
 }
