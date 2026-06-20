@@ -15,27 +15,19 @@ burger.addEventListener('click', () => {
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
 /* ── SCROLL REVEAL ───────────────────────────────────────────────────────── */
-document.querySelectorAll('.svc-card, .about-list li, .vig-cta-card, .testi-card, .section-header, .contact-text > *, .ba-caption, .footer-col, .about-content > *').forEach(el => {
-  el.classList.add('reveal');
-});
-new IntersectionObserver((entries) => {
+const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
     const d = +e.target.dataset.delay || 0;
     setTimeout(() => e.target.classList.add('visible'), d);
-    e.target._io?.unobserve(e.target);
+    io.unobserve(e.target);
   });
-}, { threshold: .1 }).observe !== undefined && (() => {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const d = +e.target.dataset.delay || 0;
-      setTimeout(() => e.target.classList.add('visible'), d);
-      io.unobserve(e.target);
-    });
-  }, { threshold: .1 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-})();
+}, { threshold: .1 });
+
+document.querySelectorAll('.svc-card, .why-list li, .vc-card, .t-card, .sec-head, .ba-cap, .f-col, .about-txt > *').forEach(el => {
+  el.classList.add('reveal');
+  io.observe(el);
+});
 
 /* ── BEFORE / AFTER ──────────────────────────────────────────────────────── */
 function initBA(slide) {
@@ -94,7 +86,7 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
   const next  = document.getElementById('tNext');
   if (!track) return;
 
-  const cards = track.querySelectorAll('.testi-card');
+  const cards = track.querySelectorAll('.t-card');
   track.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
   let cur = 0;
   let dotEls = [];
@@ -144,16 +136,16 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
 
   function set(level) {
     const c = cfg[level] || cfg.vert;
-    const badge   = document.getElementById('vigBadge');
-    const pulse   = document.getElementById('vigPulse');
+    const badge = document.getElementById('vigBadge');
+    const pulse = document.getElementById('vigPulse');
     if (!badge) return;
-    badge.className = `vig-badge-big ${level}`;
-    badge.querySelector('#vigIcon').textContent  = c.icon;
-    badge.querySelector('#vigLevel').textContent = c.label;
-    badge.querySelector('#vigDesc').textContent  = c.desc;
+    badge.className = 'vig-badge ' + level;
+    document.getElementById('vigIcon').textContent  = c.icon;
+    document.getElementById('vigLevel').textContent = c.label;
+    document.getElementById('vigDesc').textContent  = c.desc;
     if (pulse) pulse.style.background = c.pulse;
-    document.getElementById('vigUpdate').textContent = `Mis à jour le ${new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' })}`;
-    document.querySelectorAll('.vig-row').forEach(r => r.classList.remove('active'));
+    document.getElementById('vigDate').textContent = `Mis à jour le ${new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' })}`;
+    document.querySelectorAll('.vrow').forEach(r => r.classList.remove('active'));
     const key = level.charAt(0).toUpperCase() + level.slice(1);
     document.getElementById('lvl' + key)?.classList.add('active');
   }
