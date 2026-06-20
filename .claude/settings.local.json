@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mirau\\\\miraux-reunion\" -Recurse)",
+      "Bash(Select-Object FullName, Extension, Length)",
+      "Bash(Format-Table -AutoSize)",
+      "Read(//mnt/c/Users/mirau/**)",
+      "PowerShell(gh auth *)",
+      "PowerShell(wrangler *)",
+      "PowerShell(wrangler whoami *)",
+      "PowerShell(Get-Content *)",
+      "PowerShell(wrangler pages *)",
+      "PowerShell(Remove-Item *)",
+      "PowerShell(wrangler login *)",
+      "WebSearch",
+      "WebFetch(domain:internet-reunion.com)",
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:protoit974.com)",
+      "WebFetch(domain:toitureco974.com)",
+      "PowerShell(New-Item *)",
+      "WebFetch(domain:pixabay.com)",
+      "WebFetch(domain:www.pexels.com)"
+    ]
+  }
+}

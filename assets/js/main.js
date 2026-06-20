@@ -6,78 +6,75 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-/* ── BURGER MENU ─────────────────────────────────────────────────────────── */
-const burger = document.getElementById('burger');
+/* ── BURGER ──────────────────────────────────────────────────────────────── */
+const burger   = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 burger.addEventListener('click', () => {
   navLinks.classList.toggle('open');
-  burger.classList.toggle('active');
 });
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    burger.classList.remove('active');
-  });
-});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
 /* ── SCROLL REVEAL ───────────────────────────────────────────────────────── */
-const revealEls = document.querySelectorAll(
-  '.service-card, .why-list li, .vig-action-card, .ba-slide, .section-header, .contact-info > *, .footer-col'
-);
-revealEls.forEach(el => el.classList.add('reveal'));
-
-const io = new IntersectionObserver((entries) => {
+document.querySelectorAll('.svc-card, .about-list li, .vig-cta-card, .testi-card, .section-header, .contact-text > *, .ba-caption, .footer-col, .about-content > *').forEach(el => {
+  el.classList.add('reveal');
+});
+new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      const delay = e.target.dataset.delay || 0;
-      setTimeout(() => e.target.classList.add('visible'), +delay);
-      io.unobserve(e.target);
-    }
+    if (!e.isIntersecting) return;
+    const d = +e.target.dataset.delay || 0;
+    setTimeout(() => e.target.classList.add('visible'), d);
+    e.target._io?.unobserve(e.target);
   });
-}, { threshold: 0.12 });
+}, { threshold: .1 }).observe !== undefined && (() => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const d = +e.target.dataset.delay || 0;
+      setTimeout(() => e.target.classList.add('visible'), d);
+      io.unobserve(e.target);
+    });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
 
-revealEls.forEach(el => io.observe(el));
-
-/* ── BEFORE / AFTER SLIDER ──────────────────────────────────────────────── */
-function initBaSlider(slide) {
-  const wrapper = slide.querySelector('.ba-wrapper');
-  const after   = slide.querySelector('.ba-after');
-  const handle  = slide.querySelector('.ba-handle');
-  const range   = slide.querySelector('.ba-range');
-  if (!wrapper || !after || !handle || !range) return;
+/* ── BEFORE / AFTER ──────────────────────────────────────────────────────── */
+function initBA(slide) {
+  const wrap   = slide.querySelector('.ba-wrap');
+  const after  = slide.querySelector('.ba-after');
+  const handle = slide.querySelector('.ba-handle-el');
+  const range  = slide.querySelector('.ba-range');
+  if (!wrap) return;
 
   function setPos(pct) {
     pct = Math.min(95, Math.max(5, pct));
-    after.style.clipPath    = `inset(0 ${100 - pct}% 0 0)`;
-    handle.style.left       = pct + '%';
-    range.value             = pct;
+    after.style.clipPath  = `inset(0 ${100 - pct}% 0 0)`;
+    handle.style.left     = pct + '%';
+    range.value           = pct;
   }
 
   range.addEventListener('input', () => setPos(+range.value));
 
-  let dragging = false;
-  wrapper.addEventListener('mousedown',  () => dragging = true);
-  wrapper.addEventListener('touchstart', () => dragging = true, { passive: true });
-  window.addEventListener('mouseup',    () => dragging = false);
-  window.addEventListener('touchend',   () => dragging = false);
+  let drag = false;
+  const start = () => drag = true;
+  const stop  = () => drag = false;
+  const move  = (x) => {
+    if (!drag) return;
+    const r = wrap.getBoundingClientRect();
+    setPos(((x - r.left) / r.width) * 100);
+  };
 
-  window.addEventListener('mousemove', (e) => {
-    if (!dragging) return;
-    const rect = wrapper.getBoundingClientRect();
-    setPos(((e.clientX - rect.left) / rect.width) * 100);
-  });
-  window.addEventListener('touchmove', (e) => {
-    if (!dragging) return;
-    const rect = wrapper.getBoundingClientRect();
-    setPos(((e.touches[0].clientX - rect.left) / rect.width) * 100);
-  }, { passive: true });
+  wrap.addEventListener('mousedown',  start);
+  wrap.addEventListener('touchstart', start, { passive: true });
+  window.addEventListener('mouseup',  stop);
+  window.addEventListener('touchend', stop);
+  window.addEventListener('mousemove', e => move(e.clientX));
+  window.addEventListener('touchmove', e => move(e.touches[0].clientX), { passive: true });
 
   setPos(50);
 }
 
-document.querySelectorAll('.ba-slide').forEach(initBaSlider);
+document.querySelectorAll('.ba-slide').forEach(initBA);
 
-/* ── BA TABS ─────────────────────────────────────────────────────────────── */
 document.querySelectorAll('.ba-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const idx = tab.dataset.idx;
@@ -85,140 +82,114 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
     document.querySelectorAll('.ba-slide').forEach(s => s.classList.remove('active'));
     tab.classList.add('active');
     const slide = document.querySelector(`.ba-slide[data-idx="${idx}"]`);
-    if (slide) {
-      slide.classList.add('active');
-      initBaSlider(slide);
-    }
+    if (slide) { slide.classList.add('active'); initBA(slide); }
   });
 });
 
-/* ── TESTIMONIALS CAROUSEL ───────────────────────────────────────────────── */
+/* ── TESTIMONIALS ────────────────────────────────────────────────────────── */
 (function() {
-  const track   = document.getElementById('testimonialsTrack');
-  const cards   = track ? Array.from(track.querySelectorAll('.testimonial-card')) : [];
-  const dotsEl  = document.getElementById('tDots');
-  const prevBtn = document.getElementById('tPrev');
-  const nextBtn = document.getElementById('tNext');
-  if (!track || !cards.length) return;
+  const track = document.getElementById('testiTrack');
+  const dots  = document.getElementById('tDots');
+  const prev  = document.getElementById('tPrev');
+  const next  = document.getElementById('tNext');
+  if (!track) return;
 
-  const visible = () => window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-  let current = 0;
-  let dots = [];
+  const cards = track.querySelectorAll('.testi-card');
+  track.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
+  let cur = 0;
+  let dotEls = [];
+
+  function vis() { return window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3; }
+  function pages() { return Math.ceil(cards.length / vis()); }
 
   function buildDots() {
-    dotsEl.innerHTML = '';
-    dots = [];
-    const pages = Math.ceil(cards.length / visible());
-    for (let i = 0; i < pages; i++) {
+    dots.innerHTML = ''; dotEls = [];
+    for (let i = 0; i < pages(); i++) {
       const d = document.createElement('div');
-      d.className = 't-dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-      dots.push(d);
+      d.className = 't-dot' + (i === cur ? ' active' : '');
+      d.onclick = () => go(i);
+      dots.appendChild(d); dotEls.push(d);
     }
   }
 
-  function goTo(page) {
-    const pages = Math.ceil(cards.length / visible());
-    current = (page + pages) % pages;
-    const offset = current * visible();
-    track.style.transform = `translateX(calc(-${offset * (100 / visible())}% - ${offset * (1.5 / visible())}rem))`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  function go(page) {
+    cur = (page + pages()) % pages();
+    const v   = vis();
+    const off = cur * v;
+    const w   = 100 / v;
+    const g   = 1.5;
+    track.style.transform = `translateX(calc(-${off * w}% - ${off * g / v}rem))`;
+    dotEls.forEach((d, i) => d.classList.toggle('active', i === cur));
   }
 
-  track.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
-  buildDots();
+  buildDots(); go(0);
+  prev.onclick = () => go(cur - 1);
+  next.onclick = () => go(cur + 1);
 
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  let autoplay = setInterval(() => goTo(current + 1), 5000);
-  track.addEventListener('mouseenter', () => clearInterval(autoplay));
-  track.addEventListener('mouseleave', () => {
-    autoplay = setInterval(() => goTo(current + 1), 5000);
-  });
-
-  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+  let auto = setInterval(() => go(cur + 1), 5200);
+  track.addEventListener('mouseenter', () => clearInterval(auto));
+  track.addEventListener('mouseleave', () => { auto = setInterval(() => go(cur + 1), 5200); });
+  window.addEventListener('resize', () => { buildDots(); go(0); });
 })();
 
-/* ── VIGILANCE WIDGET ────────────────────────────────────────────────────── */
+/* ── VIGILANCE ───────────────────────────────────────────────────────────── */
 (function() {
-  const LEVELS = {
+  const cfg = {
     vert:   { label: 'VERT',   desc: 'Pas de vigilance particulière',          icon: '✓',  pulse: '#22c55e' },
-    jaune:  { label: 'JAUNE',  desc: 'Cyclone tropical possible dans les 72h', icon: '⚠',  pulse: '#f59e0b' },
+    jaune:  { label: 'JAUNE',  desc: 'Cyclone possible dans les 72h',          icon: '⚠',  pulse: '#f59e0b' },
     orange: { label: 'ORANGE', desc: 'Cyclone probable dans les 24h',          icon: '⚡', pulse: '#f97316' },
     rouge:  { label: 'ROUGE',  desc: 'Cyclone imminent — restez chez vous',    icon: '🔴', pulse: '#ef4444' },
     violet: { label: 'VIOLET', desc: 'Passage du cyclone sur l\'île',          icon: '🌀', pulse: '#a855f7' },
   };
 
-  function setVigilance(level) {
-    const cfg = LEVELS[level] || LEVELS.vert;
+  function set(level) {
+    const c = cfg[level] || cfg.vert;
     const badge   = document.getElementById('vigBadge');
-    const lvlEl   = document.getElementById('vigLevel');
-    const descEl  = document.getElementById('vigDesc');
-    const iconEl  = badge.querySelector('.vig-icon');
-    const pulse   = badge.parentElement.querySelector('.vig-pulse');
-    const updateEl = document.getElementById('vigUpdate');
-
-    badge.className = `vig-badge ${level}`;
-    lvlEl.textContent  = cfg.label;
-    descEl.textContent = cfg.desc;
-    if (iconEl) iconEl.textContent = cfg.icon;
-    if (pulse)  pulse.style.background = cfg.pulse;
-    updateEl.textContent = `Mis à jour le ${new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' })}`;
-
-    document.querySelectorAll('.vig-item').forEach(el => el.classList.remove('active'));
-    const active = document.getElementById(`lvl${level.charAt(0).toUpperCase() + level.slice(1)}`);
-    if (active) active.classList.add('active');
-
-    if (level === 'rouge' || level === 'violet') {
-      document.getElementById('urgenceCard')?.classList.add('pulse-urgent');
-    }
+    const pulse   = document.getElementById('vigPulse');
+    if (!badge) return;
+    badge.className = `vig-badge-big ${level}`;
+    badge.querySelector('#vigIcon').textContent  = c.icon;
+    badge.querySelector('#vigLevel').textContent = c.label;
+    badge.querySelector('#vigDesc').textContent  = c.desc;
+    if (pulse) pulse.style.background = c.pulse;
+    document.getElementById('vigUpdate').textContent = `Mis à jour le ${new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' })}`;
+    document.querySelectorAll('.vig-row').forEach(r => r.classList.remove('active'));
+    const key = level.charAt(0).toUpperCase() + level.slice(1);
+    document.getElementById('lvl' + key)?.classList.add('active');
   }
-
-  setVigilance('vert');
+  set('vert');
 })();
 
 /* ── CONTACT FORM ────────────────────────────────────────────────────────── */
 document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
-  const required = this.querySelectorAll('[required]');
-  let valid = true;
-  required.forEach(f => {
+  let ok = true;
+  this.querySelectorAll('[required]').forEach(f => {
     f.style.borderColor = '';
-    if (!f.value.trim()) {
-      f.style.borderColor = '#ef4444';
-      valid = false;
-    }
+    if (!f.value.trim()) { f.style.borderColor = '#ef4444'; ok = false; }
   });
-  if (!valid) return;
-
-  const btn = this.querySelector('.btn');
-  btn.disabled = true;
-  btn.querySelector('.btn-text').textContent = 'Envoi en cours…';
-
-  setTimeout(() => {
-    document.getElementById('formSuccess').classList.add('show');
-  }, 1200);
+  if (!ok) return;
+  const btn = this.querySelector('button[type=submit]');
+  btn.disabled = true; btn.textContent = 'Envoi…';
+  setTimeout(() => document.getElementById('formSuccess').classList.add('show'), 1200);
 });
 
-/* ── SMOOTH ANCHOR LINKS ─────────────────────────────────────────────────── */
+/* ── SMOOTH SCROLL ───────────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t) return;
     e.preventDefault();
-    const offset = navbar.offsetHeight + 16;
-    window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+    window.scrollTo({ top: t.offsetTop - navbar.offsetHeight - 16, behavior: 'smooth' });
   });
 });
 
-/* ── URGENCE FAB HIDE ON CONTACT ─────────────────────────────────────────── */
-const fab = document.getElementById('urgenceFab');
-if (fab) {
-  const contactSection = document.getElementById('contact');
+/* ── FAB HIDE IN CONTACT ─────────────────────────────────────────────────── */
+const fab = document.getElementById('fab');
+const contactSec = document.getElementById('contact');
+if (fab && contactSec) {
   new IntersectionObserver(([e]) => {
     fab.style.opacity = e.isIntersecting ? '0' : '1';
     fab.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
-  }).observe(contactSection);
+  }).observe(contactSec);
 }
