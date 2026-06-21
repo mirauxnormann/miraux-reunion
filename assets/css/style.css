@@ -1664,31 +1664,13 @@ a { color: inherit; text-decoration: none; }
 
 /* ── BA REAL PHOTOS ── */
 .ba-visual-0-before {
-  background: url('../images/4f504d5a-6013-4ba5-83d4-4b5c0a9ba467.JPG') center/cover no-repeat;
+  background: url('../images/avant.avif') center/cover no-repeat;
 }
 .ba-visual-0-before::after { display: none; }
 .ba-visual-0-after {
-  background: url('../images/9dd72a38-bbb2-4384-941a-71eed589b11e.JPG') center/cover no-repeat;
+  background: url('../images/apres.avif') center/cover no-repeat;
 }
 .ba-visual-0-after::after { display: none; }
-
-.ba-visual-1-before {
-  background: url('../images/6b328ce3-cea2-4e79-bf45-ff16e3c07aed.JPG') center/cover no-repeat;
-}
-.ba-visual-1-before::after { display: none; }
-.ba-visual-1-after {
-  background: url('../images/c37d2487-0b33-4689-bd1a-ca30153a3a81.JPG') center/cover no-repeat;
-}
-.ba-visual-1-after::after { display: none; }
-
-.ba-visual-2-before {
-  background: url('../images/e8e35eab-e7ce-455a-80e3-e427e06b5564.JPG') center/cover no-repeat;
-}
-.ba-visual-2-before::after { display: none; }
-.ba-visual-2-after {
-  background: url('../images/8c752e7d-5ef9-4301-aa27-f72c6e6b0ca1.JPG') center/cover no-repeat;
-}
-.ba-visual-2-after::after { display: none; }
 
 /* ── RESPONSIVE NOUVEAUX BLOCS ── */
 @media (max-width: 1024px) {
