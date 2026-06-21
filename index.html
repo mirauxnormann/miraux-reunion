@@ -34,7 +34,6 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#realisations">Réalisations</a></li>
       <li><a href="#localisation">Carte & Météo</a></li>
-      <li><a href="#vigilance">Vigilance</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="tel:+262692000000" class="nav-cta">📞 Devis Gratuit</a></li>
     </ul>
@@ -259,90 +258,6 @@
   </div>
 </section>
 
-<!-- ─── WAVE ─────────────────────────────────────────────────────────────── -->
-<div class="wave-divider wave-3">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-    <path d="M0,60 C480,0 960,80 1440,20 L1440,80 L0,80 Z" fill="#f0f9ff"/>
-  </svg>
-</div>
-
-<!-- ─── VIGILANCE CYCLONIQUE ──────────────────────────────────────────────── -->
-<section class="section section-light" id="vigilance">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Météo Réunion</span>
-      <h2>Vigilance <em>Cyclonique</em></h2>
-      <p>Informations en temps réel — Source : Météo France Réunion</p>
-    </div>
-
-    <div class="vigilance-widget">
-      <div class="vig-status" id="vigStatus">
-        <div class="vig-pulse"></div>
-        <div class="vig-badge vert" id="vigBadge">
-          <div class="vig-icon">✓</div>
-          <div class="vig-text">
-            <span class="vig-level" id="vigLevel">VERT</span>
-            <span class="vig-desc" id="vigDesc">Pas de vigilance particulière</span>
-          </div>
-        </div>
-        <div class="vig-update" id="vigUpdate">Mis à jour le —</div>
-      </div>
-
-      <div class="vig-scale">
-        <div class="vig-scale-title">Échelle de vigilance</div>
-        <div class="vig-levels">
-          <div class="vig-item vert-item active" id="lvlVert">
-            <div class="vig-dot"></div>
-            <div><strong>Vert</strong><p>Pas de cyclone tropical dans les 72h</p></div>
-          </div>
-          <div class="vig-item jaune-item" id="lvlJaune">
-            <div class="vig-dot"></div>
-            <div><strong>Jaune</strong><p>Cyclone possible dans les 72h</p></div>
-          </div>
-          <div class="vig-item orange-item" id="lvlOrange">
-            <div class="vig-dot"></div>
-            <div><strong>Orange</strong><p>Cyclone probable dans les 24h</p></div>
-          </div>
-          <div class="vig-item rouge-item" id="lvlRouge">
-            <div class="vig-dot"></div>
-            <div><strong>Rouge</strong><p>Cyclone imminent — rester chez soi</p></div>
-          </div>
-          <div class="vig-item violet-item" id="lvlViolet">
-            <div class="vig-dot"></div>
-            <div><strong>Violet</strong><p>Passage du cyclone sur l'île</p></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="vig-actions">
-        <div class="vig-action-card">
-          <div class="vig-action-icon">🏠</div>
-          <h4>Protéger votre toiture</h4>
-          <p>Avant la saison cyclonique, faites inspecter votre toiture. Une fixation défectueuse peut coûter très cher.</p>
-          <a href="#contact" class="btn btn-sm btn-primary">Inspection gratuite</a>
-        </div>
-        <div class="vig-action-card urgent-card" id="urgenceCard">
-          <div class="vig-action-icon">🚨</div>
-          <h4>Urgence post-cyclone</h4>
-          <p>Après le passage d'un cyclone, notre équipe intervient sous 24h pour sécuriser et réparer votre toiture.</p>
-          <a href="tel:+262692000000" class="btn btn-sm btn-urgent">Appeler maintenant</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="meteo-disclaimer">
-      <svg viewBox="0 0 20 20" width="16"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5h2v2H9v-2zm0-6h2v4H9V5z" fill="currentColor"/></svg>
-      Données indicatives. Pour la vigilance officielle : <a href="https://meteofrance.re/fr/cyclone" target="_blank" rel="noopener">meteofrance.re</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── WAVE ─────────────────────────────────────────────────────────────── -->
-<div class="wave-divider wave-4">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-    <path d="M0,20 C360,80 1080,0 1440,60 L1440,80 L0,80 Z" fill="#fff8f0"/>
-  </svg>
-</div>
 
 <!-- ─── POURQUOI NOUS ──────────────────────────────────────────────────────── -->
 <section class="section section-cream" id="pourquoi">
@@ -462,6 +377,32 @@
                 <span>🌪</span><div><b id="meteoGusts">—</b><small>Rafales km/h</small></div>
               </div>
             </div>
+            <!-- Vigilance cyclonique intégrée -->
+            <div class="vig-inline">
+              <div class="vig-inline-header">
+                <span>🌀 Vigilance cyclonique</span>
+                <a href="https://meteofrance.re/fr/cyclone" target="_blank" rel="noopener" class="vig-inline-src">meteofrance.re ↗</a>
+              </div>
+              <div class="vig-inline-body">
+                <span class="vig-pulse-dot" id="vigPulse"></span>
+                <div class="vig-inline-badge vert" id="vigBadge">
+                  <span class="vig-icon">✓</span>
+                  <div>
+                    <strong id="vigLevel">VERT</strong>
+                    <span id="vigDesc">Pas de vigilance particulière</span>
+                  </div>
+                </div>
+              </div>
+              <div class="vig-inline-scale">
+                <span class="vig-sdot sdot-vert active" id="lvlVert" title="Vert — Pas de cyclone dans les 72h"></span>
+                <span class="vig-sdot sdot-jaune" id="lvlJaune" title="Jaune — Cyclone possible dans les 72h"></span>
+                <span class="vig-sdot sdot-orange" id="lvlOrange" title="Orange — Cyclone probable dans les 24h"></span>
+                <span class="vig-sdot sdot-rouge" id="lvlRouge" title="Rouge — Cyclone imminent"></span>
+                <span class="vig-sdot sdot-violet" id="lvlViolet" title="Violet — Cyclone sur l'île"></span>
+                <span class="vig-update-txt" id="vigUpdate">—</span>
+              </div>
+            </div>
+
             <div class="meteo-alert-box" id="meteoAlertBox" style="display:none">
               <span id="meteoAlertIco">⚠</span>
               <div>

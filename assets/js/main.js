@@ -155,6 +155,42 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   }, 1200);
 });
 
+/* ── VIGILANCE CYCLONIQUE ────────────────────────────────────────────────── */
+(function() {
+  const LEVELS = {
+    vert:   { label:'VERT',   desc:'Pas de vigilance particulière',       icon:'✓',  pulse:'#22c55e' },
+    jaune:  { label:'JAUNE',  desc:'Cyclone possible dans les 72h',       icon:'⚠',  pulse:'#f59e0b' },
+    orange: { label:'ORANGE', desc:'Cyclone probable dans les 24h',       icon:'⚡', pulse:'#f97316' },
+    rouge:  { label:'ROUGE',  desc:'Cyclone imminent — restez chez vous', icon:'🔴', pulse:'#ef4444' },
+    violet: { label:'VIOLET', desc:'Passage du cyclone sur l\'île',       icon:'🌀', pulse:'#a855f7' },
+  };
+
+  function setVigilance(level) {
+    const cfg    = LEVELS[level] || LEVELS.vert;
+    const badge  = document.getElementById('vigBadge');
+    const pulse  = document.getElementById('vigPulse');
+    if (!badge) return;
+
+    badge.className = 'vig-inline-badge ' + level;
+    const icon = badge.querySelector('.vig-icon');
+    if (icon)  icon.textContent = cfg.icon;
+    if (pulse) pulse.style.background = cfg.pulse;
+
+    const lvlEl  = document.getElementById('vigLevel');
+    const descEl = document.getElementById('vigDesc');
+    const updEl  = document.getElementById('vigUpdate');
+    if (lvlEl)  lvlEl.textContent  = cfg.label;
+    if (descEl) descEl.textContent = cfg.desc;
+    if (updEl)  updEl.textContent  = new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+
+    document.querySelectorAll('.vig-sdot').forEach(d => d.classList.remove('active'));
+    const active = document.getElementById('lvl' + level.charAt(0).toUpperCase() + level.slice(1));
+    if (active) active.classList.add('active');
+  }
+
+  setVigilance('vert');
+})();
+
 /* ── SMOOTH ANCHOR LINKS ─────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
