@@ -41,7 +41,8 @@
       "Bash(curl -sk \"https://api.open-meteo.com/v1/forecast?latitude=-20.8789&longitude=55.4481&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m,weather_code,precipitation&timezone=Indian%2FReunion&wind_speed_unit=kmh\")",
       "WebFetch(domain:miraux-couvreur.com)",
       "Bash(curl -sk \"https://miraux-couvreur.com/\")",
-      "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1 | Select-Object -Last 20)"
+      "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1 | Select-Object -Last 20)",
+      "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1 | Select-Object -Last 12)"
     ]
   }
 }
