@@ -48,7 +48,7 @@ function initBaSlider(slide) {
 
   function setPos(pct) {
     pct = Math.min(95, Math.max(5, pct));
-    after.style.clipPath    = `inset(0 ${100 - pct}% 0 0)`;
+    after.style.clipPath    = `inset(0 0 0 ${pct}%)`;
     handle.style.left       = pct + '%';
     range.value             = pct;
   }
