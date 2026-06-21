@@ -9,8 +9,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
+
+<!-- ─── BANNIÈRE ALERTE MÉTÉO ─────────────────────────────────────────────── -->
+<div class="weather-alert-banner" id="weatherAlertBanner" style="display:none">
+  <div class="alert-banner-inner">
+    <span class="alert-banner-ico" id="alertBannerIco">⚠</span>
+    <strong id="alertBannerTitle">Alerte météo</strong>
+    <span id="alertBannerMsg">—</span>
+    <a href="#vigilance" class="alert-banner-link">Vigilance cyclonique →</a>
+    <button class="alert-banner-close" onclick="closeWeatherAlert()" aria-label="Fermer">✕</button>
+  </div>
+</div>
 
 <!-- ─── NAV ─────────────────────────────────────────────────────────────── -->
 <nav id="navbar">
@@ -22,6 +34,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">Services</a></li>
       <li><a href="#realisations">Réalisations</a></li>
+      <li><a href="#localisation">Carte & Météo</a></li>
       <li><a href="#vigilance">Vigilance</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="tel:+262692000000" class="nav-cta">📞 Devis Gratuit</a></li>
@@ -386,44 +399,87 @@
   </div>
 </section>
 
-<!-- ─── TEMOIGNAGES ───────────────────────────────────────────────────────── -->
-<section class="section" id="avis">
+<!-- ─── CARTE & MÉTÉO ──────────────────────────────────────────────────────── -->
+<section class="section" id="localisation">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">Ils nous font confiance</span>
-      <h2>Avis <em>clients</em></h2>
+      <span class="section-tag">Où nous sommes</span>
+      <h2>Carte & <em>Météo locale</em></h2>
+      <p>Interventions sur toute l'île · La météo de votre ville en temps réel</p>
     </div>
-    <div class="testimonials-track" id="testimonialsTrack">
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p>"Intervention rapide après le passage de Belal. Toiture sécurisée en moins de 24h. Équipe sérieuse et prix honnête. Je recommande vivement !"</p>
-        <div class="t-author"><div class="t-avatar">MR</div><div><strong>Marie-Rose L.</strong><span>Saint-Pierre</span></div></div>
+    <div class="map-meteo-grid">
+
+      <!-- CARTE -->
+      <div class="map-col">
+        <div class="map-card">
+          <div id="reunionMap"></div>
+          <div class="map-legend">
+            <span class="map-pin-dot"></span>
+            <span>MIRAUX Toiture — Saint-Denis &amp; toute l'île 974</span>
+          </div>
+        </div>
       </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p>"Réfection complète de notre toiture bac acier. Travail soigné, chantier propre à la fin. Le devis était clair et respecté. Très professionnel."</p>
-        <div class="t-author"><div class="t-avatar">JP</div><div><strong>Jean-Paul F.</strong><span>Saint-Denis</span></div></div>
+
+      <!-- MÉTÉO -->
+      <div class="meteo-col">
+        <div class="meteo-card" id="meteoCard">
+
+          <!-- Chargement -->
+          <div class="meteo-loading" id="meteoLoading">
+            <div class="meteo-spinner"></div>
+            <p>Détection de votre position…</p>
+          </div>
+
+          <!-- Contenu météo -->
+          <div class="meteo-content" id="meteoContent" style="display:none">
+            <div class="meteo-top">
+              <div>
+                <div class="meteo-city" id="meteoCity">—</div>
+                <div class="meteo-date" id="meteoDate">—</div>
+              </div>
+              <div class="meteo-icon-big" id="meteoIcon">🌤</div>
+            </div>
+            <div class="meteo-temp-row">
+              <span class="meteo-temp" id="meteoTemp">—°</span>
+              <span class="meteo-desc" id="meteoDesc">—</span>
+            </div>
+            <div class="meteo-stats-grid">
+              <div class="meteo-stat">
+                <span>💨</span><div><b id="meteoWind">—</b><small>Vent km/h</small></div>
+              </div>
+              <div class="meteo-stat">
+                <span>💧</span><div><b id="meteoHumidity">—</b><small>Humidité %</small></div>
+              </div>
+              <div class="meteo-stat">
+                <span>🌧</span><div><b id="meteoRain">—</b><small>Précip. mm</small></div>
+              </div>
+              <div class="meteo-stat">
+                <span>🌪</span><div><b id="meteoGusts">—</b><small>Rafales km/h</small></div>
+              </div>
+            </div>
+            <div class="meteo-alert-box" id="meteoAlertBox" style="display:none">
+              <span id="meteoAlertIco">⚠</span>
+              <div>
+                <strong id="meteoAlertTitle">—</strong>
+                <p id="meteoAlertText">—</p>
+              </div>
+            </div>
+            <div class="meteo-footer">
+              <span>Open-Meteo · mis à jour <span id="meteoTime">—</span></span>
+              <button class="meteo-refresh" onclick="loadMeteo()" title="Actualiser">↻</button>
+            </div>
+          </div>
+
+          <!-- Erreur géoloc -->
+          <div class="meteo-error" id="meteoError" style="display:none">
+            <span class="meteo-error-ico">📍</span>
+            <p>Autorisez la géolocalisation pour voir la météo de votre ville</p>
+            <button onclick="loadMeteo()" class="btn btn-sm btn-primary">Détecter ma position</button>
+          </div>
+
+        </div>
       </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p>"Peinture toiture et nettoyage façade. On dirait une maison neuve ! Le traitement anti-mousse a vraiment fait une différence. Merci !"</p>
-        <div class="t-author"><div class="t-avatar">NS</div><div><strong>Nathalie S.</strong><span>Le Tampon</span></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p>"Zinguerie complète remplacée. Les nouvelles gouttières sont parfaites, plus de problème d'infiltration. Délais tenus, artisans courtois."</p>
-        <div class="t-author"><div class="t-avatar">DB</div><div><strong>David B.</strong><span>Saint-Leu</span></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p>"Très satisfait de la réfection complète. Isolation thermique incluse — la maison est bien plus fraîche depuis. Rapport qualité-prix excellent."</p>
-        <div class="t-author"><div class="t-avatar">CR</div><div><strong>Christine R.</strong><span>Saint-André</span></div></div>
-      </div>
-    </div>
-    <div class="testimonials-nav">
-      <button class="t-prev" id="tPrev" aria-label="Précédent">‹</button>
-      <div class="t-dots" id="tDots"></div>
-      <button class="t-next" id="tNext" aria-label="Suivant">›</button>
+
     </div>
   </div>
 </section>
@@ -592,6 +648,8 @@
   <span class="fab-label">Urgence</span>
 </a>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/meteo.js"></script>
 </body>
 </html>

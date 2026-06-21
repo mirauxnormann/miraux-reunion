@@ -1181,3 +1181,213 @@ a { color: inherit; text-decoration: none; }
   .contact-form { padding: 1.5rem; }
   h2 { font-size: 1.6rem; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   BANNIÈRE ALERTE MÉTÉO
+   ══════════════════════════════════════════════════════════════ */
+.weather-alert-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .6rem 1rem;
+  font-family: var(--font-head);
+  font-size: .82rem;
+  font-weight: 600;
+  gap: .75rem;
+  animation: alertSlide .4s ease;
+}
+@keyframes alertSlide {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+.alert-banner-jaune  { background: #f59e0b; color: #1a1000; }
+.alert-banner-orange { background: #f97316; color: #fff; }
+.alert-banner-rouge  { background: #dc2626; color: #fff; }
+.alert-banner-violet { background: #7c3aed; color: #fff; }
+.alert-banner-inner {
+  display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; justify-content: center;
+}
+.alert-banner-ico { font-size: 1.1rem; flex-shrink: 0; }
+.alert-banner-link {
+  text-decoration: underline; color: inherit; opacity: .85; white-space: nowrap;
+}
+.alert-banner-link:hover { opacity: 1; }
+.alert-banner-close {
+  background: rgba(0,0,0,.18); border: none; color: inherit; cursor: pointer;
+  width: 22px; height: 22px; border-radius: 50%; font-size: .8rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.alert-banner-close:hover { background: rgba(0,0,0,.35); }
+
+/* ══════════════════════════════════════════════════════════════
+   CARTE + MÉTÉO — LAYOUT
+   ══════════════════════════════════════════════════════════════ */
+.map-meteo-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── CARTE ── */
+.map-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,119,182,.12);
+  border: 1px solid rgba(0,119,182,.15);
+}
+#reunionMap {
+  height: 440px;
+  width: 100%;
+  background: #e8f4f8;
+}
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1rem;
+  background: #fff;
+  font-size: .8rem;
+  color: var(--gray);
+  border-top: 1px solid #e5e5e5;
+}
+.map-pin-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--orange); flex-shrink: 0;
+}
+
+/* Marqueur Leaflet personnalisé */
+.leaflet-custom-marker {
+  display: flex; flex-direction: column; align-items: center;
+}
+.marker-pin {
+  width: 20px; height: 20px; border-radius: 50% 50% 50% 0;
+  background: var(--orange, #F27059);
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.marker-label {
+  background: var(--orange, #F27059);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 700;
+  padding: .18rem .55rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+.map-popup { font-size: .82rem; line-height: 1.6; }
+.map-popup strong { display: block; margin-bottom: .25rem; }
+.map-popup a { color: var(--orange, #F27059); font-weight: 600; }
+
+/* ── MÉTÉO WIDGET ── */
+.meteo-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0,119,182,.12);
+  box-shadow: 0 8px 32px rgba(0,119,182,.1);
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.meteo-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--gray);
+  font-size: .9rem;
+  padding: 2rem;
+}
+.meteo-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(0,119,182,.15);
+  border-top-color: var(--turquoise);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.meteo-content { padding: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.meteo-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.meteo-city {
+  font-family: var(--font-head); font-size: 1.25rem; font-weight: 700;
+  color: var(--dark);
+}
+.meteo-date { font-size: .78rem; color: var(--gray); margin-top: .2rem; text-transform: capitalize; }
+.meteo-icon-big { font-size: 3.2rem; line-height: 1; }
+
+.meteo-temp-row {
+  display: flex; align-items: baseline; gap: 1rem;
+}
+.meteo-temp {
+  font-family: var(--font-head); font-size: 3rem; font-weight: 900;
+  color: var(--dark); line-height: 1;
+}
+.meteo-desc { font-size: .9rem; color: var(--gray); }
+
+.meteo-stats-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .75rem;
+}
+.meteo-stat {
+  display: flex; align-items: center; gap: .6rem;
+  background: var(--gray-l); border-radius: 10px; padding: .7rem .85rem;
+}
+.meteo-stat > span { font-size: 1.2rem; flex-shrink: 0; }
+.meteo-stat b { display: block; font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+.meteo-stat small { font-size: .7rem; color: var(--gray); display: block; }
+
+/* Alertes dans le widget */
+.meteo-alert-box {
+  display: flex; align-items: flex-start; gap: .75rem;
+  padding: .85rem 1rem; border-radius: 10px;
+  font-size: .82rem; line-height: 1.5;
+}
+.meteo-alert-box > span { font-size: 1.3rem; flex-shrink: 0; }
+.meteo-alert-box strong { display: block; font-size: .9rem; margin-bottom: .15rem; }
+.alert-jaune  { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+.alert-orange { background: #fff7ed; color: #9a3412; border: 1px solid #f97316; }
+.alert-rouge  { background: #fef2f2; color: #991b1b; border: 1px solid #ef4444; }
+.alert-violet { background: #f5f3ff; color: #4c1d95; border: 1px solid #7c3aed; }
+
+.meteo-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: .7rem; color: var(--gray); margin-top: auto; padding-top: .5rem;
+  border-top: 1px solid #f0f0f0;
+}
+.meteo-refresh {
+  background: none; border: 1px solid var(--gray); border-radius: 50%;
+  width: 24px; height: 24px; cursor: pointer; font-size: .85rem; color: var(--gray);
+  display: flex; align-items: center; justify-content: center; transition: .2s;
+}
+.meteo-refresh:hover { border-color: var(--turquoise); color: var(--turquoise); transform: rotate(180deg); }
+
+.meteo-error {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  padding: 2rem; text-align: center;
+  color: var(--gray); font-size: .88rem;
+}
+.meteo-error-ico { font-size: 2.5rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .map-meteo-grid { grid-template-columns: 1fr; }
+  #reunionMap { height: 300px; }
+  .meteo-card { min-height: auto; }
+}
+@media (max-width: 480px) {
+  .meteo-stats-grid { grid-template-columns: 1fr 1fr; }
+  .meteo-temp { font-size: 2.2rem; }
+}

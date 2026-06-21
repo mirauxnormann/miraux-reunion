@@ -27,7 +27,12 @@
       "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main 2>&1)",
       "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages project list 2>&1)",
       "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deployment list --project-name=miraux-reunion 2>&1)",
-      "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1)"
+      "PowerShell(cd \"C:\\\\Users\\\\mirau\\\\miraux-reunion\"; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1)",
+      "WebFetch(domain:miraux-reunion.pages.dev)",
+      "Bash(git show *)",
+      "Bash(cp /tmp/v1_index.html \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\index.html\")",
+      "Bash(cp /tmp/v1_style.css \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\assets\\\\css\\\\style.css\")",
+      "Bash(cp /tmp/v1_main.js \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\assets\\\\js\\\\main.js\")"
     ]
   }
 }

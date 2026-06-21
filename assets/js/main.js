@@ -92,54 +92,7 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
   });
 });
 
-/* ── TESTIMONIALS CAROUSEL ───────────────────────────────────────────────── */
-(function() {
-  const track   = document.getElementById('testimonialsTrack');
-  const cards   = track ? Array.from(track.querySelectorAll('.testimonial-card')) : [];
-  const dotsEl  = document.getElementById('tDots');
-  const prevBtn = document.getElementById('tPrev');
-  const nextBtn = document.getElementById('tNext');
-  if (!track || !cards.length) return;
-
-  const visible = () => window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
-  let current = 0;
-  let dots = [];
-
-  function buildDots() {
-    dotsEl.innerHTML = '';
-    dots = [];
-    const pages = Math.ceil(cards.length / visible());
-    for (let i = 0; i < pages; i++) {
-      const d = document.createElement('div');
-      d.className = 't-dot' + (i === 0 ? ' active' : '');
-      d.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(d);
-      dots.push(d);
-    }
-  }
-
-  function goTo(page) {
-    const pages = Math.ceil(cards.length / visible());
-    current = (page + pages) % pages;
-    const offset = current * visible();
-    track.style.transform = `translateX(calc(-${offset * (100 / visible())}% - ${offset * (1.5 / visible())}rem))`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  track.style.transition = 'transform .5s cubic-bezier(.4,0,.2,1)';
-  buildDots();
-
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  let autoplay = setInterval(() => goTo(current + 1), 5000);
-  track.addEventListener('mouseenter', () => clearInterval(autoplay));
-  track.addEventListener('mouseleave', () => {
-    autoplay = setInterval(() => goTo(current + 1), 5000);
-  });
-
-  window.addEventListener('resize', () => { buildDots(); goTo(0); });
-})();
+/* Testimonials supprimés — remplacés par Carte & Météo */
 
 /* ── VIGILANCE WIDGET ────────────────────────────────────────────────────── */
 (function() {
