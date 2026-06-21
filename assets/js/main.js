@@ -1,7 +1,7 @@
 'use strict';
 
 /* NAV */
-const nav = document.getElementById('nav');
+const nav = document.getElementById('header');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 
 const burger = document.getElementById('burger');
@@ -18,7 +18,7 @@ const revIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: .12 });
 
-document.querySelectorAll('.svc, .testi-card, .vc-card, .sec-head, .checks li, .g-a, .g-b, .foot-col').forEach((el, i) => {
+document.querySelectorAll('.svc-card, .testi-card, .vig-card, .section-head, .atouts li, .g-tall, .g-sm, .foot-col').forEach((el, i) => {
   el.classList.add('rev');
   el.dataset.delay = (i % 4) * 75;
   revIO.observe(el);
@@ -121,7 +121,7 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
     const badge = document.getElementById('vigBadge');
     if (!badge) return;
     badge.className = 'vig-badge ' + level;
-    document.getElementById('vigIco').textContent   = c.ico;
+    document.getElementById('vigIcon').textContent  = c.ico;
     document.getElementById('vigLevel').textContent = c.label;
     document.getElementById('vigDesc').textContent  = c.desc;
     const pulse = document.getElementById('vigPulse');

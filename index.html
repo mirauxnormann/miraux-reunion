@@ -3,141 +3,177 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <meta name="description" content="MIRAUX Couvreur — Artisan toiture La Réunion 974. Bac acier, peinture, zinguerie, urgences cycloniques. Devis gratuit."/>
-  <title>MIRAUX Couvreur · Toiture La Réunion 974</title>
+  <meta name="description" content="MIRAUX Couvreur Réunion — Artisan toiture 974. Pose bac acier, peinture, zinguerie, urgences cycloniques. Devis et diagnostic gratuit."/>
+  <title>MIRAUX Couvreur Réunion — Artisan Toiture 974</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-in">
+<!-- ===== NAV ===== -->
+<header id="header">
+  <div class="container nav-wrap">
     <a href="#" class="logo">
-      <svg width="32" height="28" viewBox="0 0 32 28" fill="none">
-        <polygon points="16,2 30,12 2,12" fill="#E8520A"/>
-        <rect x="4" y="12" width="24" height="14" rx="1" fill="#C43F05"/>
-        <rect x="12" y="17" width="8" height="9" rx="1" fill="rgba(255,255,255,.2)"/>
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
+        <polygon points="17,2 32,13 2,13" fill="#E8520A"/>
+        <rect x="5" y="13" width="24" height="15" rx="1" fill="#C43F05"/>
+        <rect x="12" y="18" width="10" height="10" rx="1" fill="rgba(255,255,255,.2)"/>
       </svg>
-      <span>MIRAUX <em>COUVREUR</em></span>
+      <div>
+        <span class="logo-name">MIRAUX</span>
+        <span class="logo-sub">Couvreur · Réunion 974</span>
+      </div>
     </a>
-    <ul id="navLinks" class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#realisations">Réalisations</a></li>
-      <li><a href="#galerie">Galerie</a></li>
-      <li><a href="#vigilance">Vigilance</a></li>
-      <li><a href="#contact" class="nav-cta">Devis gratuit</a></li>
-    </ul>
-    <button id="burger" class="burger"><span></span><span></span><span></span></button>
+    <nav>
+      <ul id="navLinks" class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#vigilance">Vigilance</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="nav-devis">Devis gratuit</a></li>
+      </ul>
+    </nav>
+    <button id="burger" class="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
+</header>
 
-<!-- HERO -->
+<!-- ===== HERO ===== -->
 <section id="hero">
-  <img src="assets/images/84dc0a94-f80e-4efd-b99c-fb952d23f9b0.JPG" alt="" class="hero-bg" fetchpriority="high"/>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-label">Artisan couvreur · La Réunion 974</div>
-    <h1>MIRAUX<br/><span>COUVREUR</span></h1>
-    <p>Pose bac acier · Peinture toiture · Zinguerie<br/>Urgences cycloniques · 15 ans d'expérience</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-main">Devis gratuit</a>
-      <a href="tel:+262692000000" class="btn-tel">📞 0692 00 00 00</a>
+  <img src="assets/images/84dc0a94-f80e-4efd-b99c-fb952d23f9b0.JPG" alt="Toiture bac acier La Réunion" class="hero-img" fetchpriority="high"/>
+  <div class="hero-shade"></div>
+  <div class="hero-body container">
+    <p class="hero-kicker">Artisan couvreur · La Réunion 974</p>
+    <h1>MIRAUX<br/><span>Couvreur</span></h1>
+    <p class="hero-desc">Pose bac acier, peinture toiture, zinguerie<br/>et urgences cycloniques sur toute l'île.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-orange">Devis &amp; diagnostic gratuit</a>
+      <a href="tel:+262692000000" class="btn-white">📞 0692 00 00 00</a>
     </div>
   </div>
-  <div class="hero-band">
-    <div class="hb"><strong>500+</strong><span>Chantiers</span></div>
-    <div class="hb-sep"></div>
-    <div class="hb"><strong>15 ans</strong><span>Expérience</span></div>
-    <div class="hb-sep"></div>
-    <div class="hb"><strong>24h/24</strong><span>Urgences</span></div>
-    <div class="hb-sep"></div>
-    <div class="hb"><strong>100%</strong><span>Local</span></div>
+  <div class="hero-bar">
+    <div class="hstat"><b>500+</b><span>Chantiers</span></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><b>15 ans</b><span>Expérience</span></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><b>24h/24</b><span>Urgences</span></div>
+    <div class="hdiv"></div>
+    <div class="hstat"><b>100%</b><span>Local</span></div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="sec sec-light">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Nos expertises</span>
-      <h2>Ce que<br/>nous faisons</h2>
+<!-- ===== SERVICES ===== -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Nos expertises</span>
+      <h2>Nos services de toiture</h2>
+      <p>Toutes les prestations adaptées au climat tropical de La Réunion</p>
     </div>
-    <div class="svc-list">
+    <div class="svc-grid">
 
-      <article class="svc">
-        <div class="svc-n">01</div>
-        <div class="svc-img"><img src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt="Bac acier"/></div>
-        <div class="svc-txt">
+      <div class="svc-card">
+        <div class="svc-img">
+          <img src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt="Pose bac acier La Réunion"/>
+          <span class="svc-num">01</span>
+        </div>
+        <div class="svc-body">
           <h3>Pose tôle bac acier</h3>
-          <p>Galvanisé ou laqué. Fixations renforcées normes anticyclone. Garantie décennale.</p>
-          <a href="#contact" class="lnk">Demander un devis →</a>
+          <p>Galvanisé ou laqué, fixations renforcées normes anticyclone. Garantie décennale incluse.</p>
+          <a href="#contact" class="svc-link">Demander un devis →</a>
         </div>
-      </article>
+      </div>
 
-      <article class="svc">
-        <div class="svc-n">02</div>
-        <div class="svc-img"><img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt="Peinture toiture"/></div>
-        <div class="svc-txt">
+      <div class="svc-card">
+        <div class="svc-img">
+          <img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt="Peinture toiture Réunion"/>
+          <span class="svc-num">02</span>
+        </div>
+        <div class="svc-body">
           <h3>Peinture toiture</h3>
-          <p>Anti-mousse, primaire anticorrosion, finition résine. Protection longue durée contre UV et humidité tropicale.</p>
-          <a href="#contact" class="lnk">Demander un devis →</a>
+          <p>Anti-mousse, primaire anticorrosion, finition résine. Protection durable contre les UV et l'humidité tropicale.</p>
+          <a href="#contact" class="svc-link">Demander un devis →</a>
         </div>
-      </article>
+      </div>
 
-      <article class="svc">
-        <div class="svc-n">03</div>
-        <div class="svc-img"><img src="assets/images/548acee9-181e-4652-af24-7ef392d01fa9.JPG" alt="Réfection"/></div>
-        <div class="svc-txt">
+      <div class="svc-card">
+        <div class="svc-img">
+          <img src="assets/images/548acee9-181e-4652-af24-7ef392d01fa9.JPG" alt="Réfection toiture complète"/>
+          <span class="svc-num">03</span>
+        </div>
+        <div class="svc-body">
           <h3>Réfection complète</h3>
-          <p>Dépose de l'ancienne couverture, traitement charpente, isolation thermique, pose neuve clé en main.</p>
-          <a href="#contact" class="lnk">Demander un devis →</a>
+          <p>Dépose de l'ancienne couverture, traitement de charpente, isolation thermique et pose neuve clé en main.</p>
+          <a href="#contact" class="svc-link">Demander un devis →</a>
         </div>
-      </article>
+      </div>
 
-      <article class="svc">
-        <div class="svc-n">04</div>
-        <div class="svc-img"><img src="assets/images/4371d0e0-c674-46c1-8c74-85a3a3e04747.JPG" alt="Zinguerie"/></div>
-        <div class="svc-txt">
+      <div class="svc-card">
+        <div class="svc-img">
+          <img src="assets/images/4371d0e0-c674-46c1-8c74-85a3a3e04747.JPG" alt="Zinguerie La Réunion"/>
+          <span class="svc-num">04</span>
+        </div>
+        <div class="svc-body">
           <h3>Zinguerie</h3>
-          <p>Gouttières, descentes pluviales, noues, faîtières, solins. Zinc, aluminium ou PVC.</p>
-          <a href="#contact" class="lnk">Demander un devis →</a>
+          <p>Gouttières, descentes pluviales, noues, faîtières et solins. Zinc, aluminium ou PVC selon votre projet.</p>
+          <a href="#contact" class="svc-link">Demander un devis →</a>
         </div>
-      </article>
+      </div>
 
-      <article class="svc svc-urg">
-        <div class="svc-n">05</div>
-        <div class="svc-urgbadge">⚡ URGENCE 24h/24</div>
-        <div class="svc-img"><img src="assets/images/e8e35eab-e7ce-455a-80e3-e427e06b5564.JPG" alt="Urgence"/></div>
-        <div class="svc-txt">
+      <div class="svc-card svc-urgence">
+        <div class="svc-img">
+          <img src="assets/images/e8e35eab-e7ce-455a-80e3-e427e06b5564.JPG" alt="Urgence cyclone toiture"/>
+          <span class="svc-num">05</span>
+          <span class="svc-badge">⚡ URGENCE 24h/24</span>
+        </div>
+        <div class="svc-body">
           <h3>Urgences post-cyclone</h3>
-          <p>Bâchage, sécurisation immédiate. Intervention sous 24h après passage d'un cyclone.</p>
-          <a href="tel:+262692000000" class="lnk lnk-red">Appeler maintenant →</a>
+          <p>Bâchage, sécurisation immédiate et remise en état. Intervention sous 24h après passage d'un cyclone.</p>
+          <a href="tel:+262692000000" class="svc-link svc-link-red">Appeler maintenant →</a>
         </div>
-      </article>
+      </div>
 
-      <article class="svc">
-        <div class="svc-n">06</div>
-        <div class="svc-img"><img src="assets/images/19545997-d9ae-4b4a-ac96-1e6310e4bbf2.JPG" alt="Nettoyage"/></div>
-        <div class="svc-txt">
-          <h3>Nettoyage &amp; façade</h3>
-          <p>Hydrojetting haute pression, traitement algicide, hydrofuge. Résultat immédiat, protection durable.</p>
-          <a href="#contact" class="lnk">Demander un devis →</a>
+      <div class="svc-card">
+        <div class="svc-img">
+          <img src="assets/images/19545997-d9ae-4b4a-ac96-1e6310e4bbf2.JPG" alt="Nettoyage toiture façade"/>
+          <span class="svc-num">06</span>
         </div>
-      </article>
+        <div class="svc-body">
+          <h3>Nettoyage toiture &amp; façade</h3>
+          <p>Hydrojetting haute pression, traitement algicide, hydrofuge. Résultat immédiat et protection durable.</p>
+          <a href="#contact" class="svc-link">Demander un devis →</a>
+        </div>
+      </div>
 
     </div>
   </div>
 </section>
 
-<!-- AVANT / APRÈS -->
-<section id="realisations" class="sec sec-dark">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow light">Nos réalisations</span>
-      <h2 class="wh">Avant /<br/><em>Après</em></h2>
+<!-- ===== DEVIS GRATUIT BANNER ===== -->
+<section id="devis" class="devis-banner">
+  <div class="container devis-inner">
+    <div class="devis-text">
+      <h2>Devis &amp; Diagnostic <span>Gratuit</span></h2>
+      <p>Nous nous déplaçons sur toute l'île pour évaluer votre toiture sans engagement. Réponse sous 48h garantie.</p>
+    </div>
+    <div class="devis-actions">
+      <a href="#contact" class="btn-orange">Demander mon devis gratuit</a>
+      <a href="tel:+262692000000" class="btn-outline-white">📞 0692 00 00 00</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AVANT / APRÈS ===== -->
+<section id="realisations" class="section section-dark">
+  <div class="container">
+    <div class="section-head">
+      <span class="label label-light">Nos réalisations</span>
+      <h2 class="white">Avant / Après</h2>
+      <p class="white-muted">Glissez le curseur pour voir la transformation</p>
     </div>
     <div class="ba-tabs">
       <button class="ba-tab active" data-tab="0">Réfection zinc</button>
@@ -145,89 +181,139 @@
       <button class="ba-tab" data-tab="2">Peinture toiture</button>
     </div>
     <div class="ba-panels">
+
       <div class="ba-panel active" data-panel="0">
         <div class="ba-wrap">
-          <div class="ba-before"><img src="assets/images/toiture-zinc-avant.jpg" alt="Avant"/><span class="ba-l">AVANT</span></div>
-          <div class="ba-after"><img src="assets/images/toiture-zinc-apres.jpg" alt="Après"/><span class="ba-l ba-r">APRÈS</span></div>
-          <div class="ba-handle"><div class="ba-line"></div><div class="ba-btn">⟺</div><div class="ba-line"></div></div>
+          <div class="ba-before">
+            <img src="assets/images/toiture-zinc-avant.jpg" alt="Avant réfection zinc"/>
+            <span class="ba-lbl">AVANT</span>
+          </div>
+          <div class="ba-after">
+            <img src="assets/images/toiture-zinc-apres.jpg" alt="Après réfection zinc"/>
+            <span class="ba-lbl ba-lbl-after">APRÈS</span>
+          </div>
+          <div class="ba-handle">
+            <div class="ba-bar"></div>
+            <div class="ba-circle">⟺</div>
+            <div class="ba-bar"></div>
+          </div>
           <input class="ba-range" type="range" min="5" max="95" value="50"/>
         </div>
-        <p class="ba-cap"><strong>Réfection toiture zinc</strong> — Dépose complète, nettoyage charpente, pose toiture zinc neuve.</p>
+        <p class="ba-caption"><strong>Réfection toiture zinc</strong> — Dépose complète, traitement charpente, pose toiture zinc neuve.</p>
       </div>
+
       <div class="ba-panel" data-panel="1">
         <div class="ba-wrap">
-          <div class="ba-before"><img src="assets/images/e8e35eab-e7ce-455a-80e3-e427e06b5564.JPG" alt="Avant"/><span class="ba-l">AVANT</span></div>
-          <div class="ba-after"><img src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt="Après"/><span class="ba-l ba-r">APRÈS</span></div>
-          <div class="ba-handle"><div class="ba-line"></div><div class="ba-btn">⟺</div><div class="ba-line"></div></div>
+          <div class="ba-before">
+            <img src="assets/images/e8e35eab-e7ce-455a-80e3-e427e06b5564.JPG" alt="Bac acier rouillé avant"/>
+            <span class="ba-lbl">AVANT</span>
+          </div>
+          <div class="ba-after">
+            <img src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt="Bac acier neuf après"/>
+            <span class="ba-lbl ba-lbl-after">APRÈS</span>
+          </div>
+          <div class="ba-handle">
+            <div class="ba-bar"></div>
+            <div class="ba-circle">⟺</div>
+            <div class="ba-bar"></div>
+          </div>
           <input class="ba-range" type="range" min="5" max="95" value="50"/>
         </div>
-        <p class="ba-cap"><strong>Remplacement bac acier rouillé</strong> — Nettoyage, dépose, pose bac acier anthracite neuf.</p>
+        <p class="ba-caption"><strong>Remplacement bac acier rouillé</strong> — Nettoyage HP, dépose ancienne toiture, pose bac acier anthracite neuf.</p>
       </div>
+
       <div class="ba-panel" data-panel="2">
         <div class="ba-wrap">
-          <div class="ba-before"><img src="assets/images/7f3f2187-5b14-496f-b511-5d6eefe30f8b.JPG" alt="Avant"/><span class="ba-l">AVANT</span></div>
-          <div class="ba-after"><img src="assets/images/548acee9-181e-4652-af24-7ef392d01fa9.JPG" alt="Après"/><span class="ba-l ba-r">APRÈS</span></div>
-          <div class="ba-handle"><div class="ba-line"></div><div class="ba-btn">⟺</div><div class="ba-line"></div></div>
+          <div class="ba-before">
+            <img src="assets/images/7f3f2187-5b14-496f-b511-5d6eefe30f8b.JPG" alt="Toiture avant peinture"/>
+            <span class="ba-lbl">AVANT</span>
+          </div>
+          <div class="ba-after">
+            <img src="assets/images/548acee9-181e-4652-af24-7ef392d01fa9.JPG" alt="Toiture après peinture"/>
+            <span class="ba-lbl ba-lbl-after">APRÈS</span>
+          </div>
+          <div class="ba-handle">
+            <div class="ba-bar"></div>
+            <div class="ba-circle">⟺</div>
+            <div class="ba-bar"></div>
+          </div>
           <input class="ba-range" type="range" min="5" max="95" value="50"/>
         </div>
-        <p class="ba-cap"><strong>Peinture anticorrosion</strong> — Primaire rouille + finition peinture blanche au pistolet airless.</p>
+        <p class="ba-caption"><strong>Peinture anticorrosion</strong> — Primaire rouille + finition peinture blanche au pistolet airless.</p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- GALERIE -->
-<section id="galerie" class="sec sec-grey">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Galerie</span>
-      <h2>Nos chantiers<br/>en images</h2>
+<!-- ===== GALERIE ===== -->
+<section id="galerie" class="section section-grey">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Galerie</span>
+      <h2>Nos chantiers en images</h2>
+      <p>Photos réelles de nos interventions à La Réunion</p>
     </div>
     <div class="gallery">
-      <div class="g-a"><img src="assets/images/84dc0a94-f80e-4efd-b99c-fb952d23f9b0.JPG" alt=""/></div>
-      <div class="g-b"><img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt=""/></div>
-      <div class="g-b"><img src="assets/images/d8cf3892-7f48-41a8-9f78-e567421fe2d7.JPG" alt=""/></div>
-      <div class="g-b"><img src="assets/images/3c242962-7fb2-4801-b63c-2b43cb9381d4.JPG" alt=""/></div>
-      <div class="g-b"><img src="assets/images/4fc40946-a414-4108-b014-bcaa03870cdd.JPG" alt=""/></div>
-      <div class="g-a"><img src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt=""/></div>
+      <div class="g-tall"><img src="assets/images/84dc0a94-f80e-4efd-b99c-fb952d23f9b0.JPG" alt="Bac acier neuf"/></div>
+      <div class="g-sm"><img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt="Peinture toiture"/></div>
+      <div class="g-sm"><img src="assets/images/d8cf3892-7f48-41a8-9f78-e567421fe2d7.JPG" alt="Toiture bleue"/></div>
+      <div class="g-sm"><img src="assets/images/3c242962-7fb2-4801-b63c-2b43cb9381d4.JPG" alt="Toiture blanche"/></div>
+      <div class="g-sm"><img src="assets/images/4fc40946-a414-4108-b014-bcaa03870cdd.JPG" alt="Zinguerie"/></div>
+      <div class="g-sm"><img src="assets/images/bc58e274-81f1-4e50-9620-20b689f9d2ea.JPG" alt="Étanchéité"/></div>
+      <div class="g-sm"><img src="assets/images/5f9e3c47-f35f-4d5d-a6aa-043824f9a1bb.JPG" alt="Chantier toiture"/></div>
+      <div class="g-sm"><img src="assets/images/9dd72a38-bbb2-4384-941a-71eed589b11e.JPG" alt="Pose toiture"/></div>
     </div>
   </div>
 </section>
 
-<!-- POURQUOI MIRAUX -->
-<section id="about" class="sec sec-dark">
-  <div class="wrap about-grid">
+<!-- ===== POURQUOI MIRAUX ===== -->
+<section id="apropos" class="section">
+  <div class="container about-grid">
     <div class="about-img">
-      <img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt="Chantier Réunion"/>
-      <div class="about-badge"><strong>15+</strong><span>ans sur l'île</span></div>
+      <img src="assets/images/96882a0d-cd73-4f1b-a9c8-f3ad66183b75.JPG" alt="Chantier toiture Réunion"/>
+      <div class="about-img-badge"><b>15+</b><span>ans sur l'île</span></div>
     </div>
     <div class="about-txt">
-      <span class="eyebrow light">Pourquoi MIRAUX</span>
-      <h2 class="wh">L'artisan qui<br/><em>connaît l'île</em></h2>
-      <p>Nous connaissons le climat réunionnais : humidité saline, vents cycloniques, UV intenses. Chaque matériau posé est sélectionné pour résister.</p>
-      <ul class="checks">
-        <li><span>✓</span><div><strong>Garantie décennale</strong> — Tous travaux couverts 10 ans.</div></li>
-        <li><span>✓</span><div><strong>Matériaux anticyclone</strong> — Visserie inox, normes NV65 et Eurocodes DOM.</div></li>
-        <li><span>✓</span><div><strong>Devis en 48h</strong> — Réponse rapide, descriptif précis, sans engagement.</div></li>
-        <li><span>✓</span><div><strong>100% réunionnais</strong> — On connaît chaque commune, chaque microclimat.</div></li>
+      <span class="label">Pourquoi nous choisir</span>
+      <h2>L'artisan de confiance à La Réunion</h2>
+      <p>Nous connaissons le climat réunionnais : humidité saline, vents cycloniques, UV intenses. Chaque matériau que nous posons est sélectionné pour résister à ces conditions.</p>
+      <ul class="atouts">
+        <li>
+          <span class="atout-ico">✓</span>
+          <div><strong>Devis et diagnostic gratuit</strong> — Nous nous déplaçons sans frais pour évaluer votre toiture.</div>
+        </li>
+        <li>
+          <span class="atout-ico">✓</span>
+          <div><strong>Garantie décennale</strong> — Assurance professionnelle complète, tous travaux couverts 10 ans.</div>
+        </li>
+        <li>
+          <span class="atout-ico">✓</span>
+          <div><strong>Matériaux anticyclone</strong> — Visserie inox, fixations renforcées, normes NV65 et Eurocodes DOM.</div>
+        </li>
+        <li>
+          <span class="atout-ico">✓</span>
+          <div><strong>100% réunionnais</strong> — On connaît chaque commune, chaque microclimat de l'île.</div>
+        </li>
       </ul>
-      <a href="#contact" class="btn-main">Obtenir un devis</a>
+      <a href="#contact" class="btn-orange">Obtenir mon devis gratuit</a>
     </div>
   </div>
 </section>
 
-<!-- VIGILANCE CYCLONIQUE -->
-<section id="vigilance" class="sec sec-grey">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Météo Réunion</span>
-      <h2>Vigilance<br/><em>Cyclonique</em></h2>
+<!-- ===== VIGILANCE CYCLONIQUE ===== -->
+<section id="vigilance" class="section section-grey">
+  <div class="container">
+    <div class="section-head">
+      <span class="label">Météo Réunion</span>
+      <h2>Vigilance Cyclonique</h2>
+      <p>Niveaux officiels — Source Météo France Réunion</p>
     </div>
-    <div class="vig-grid">
-      <div class="vig-left">
-        <div class="vig-dot-anim" id="vigPulse"></div>
+    <div class="vig-layout">
+      <div class="vig-status">
+        <div class="vig-pulse" id="vigPulse"></div>
         <div class="vig-badge vert" id="vigBadge">
-          <span class="vig-ico" id="vigIco">✓</span>
+          <span class="vig-icon" id="vigIcon">✓</span>
           <div>
             <strong id="vigLevel">VERT</strong>
             <span id="vigDesc">Pas de vigilance particulière</span>
@@ -236,118 +322,220 @@
         <p class="vig-date" id="vigDate">—</p>
       </div>
       <div class="vig-scale">
-        <div class="vig-row v-vert active" id="rowVert"><i></i><div><b>Vert</b><p>Pas de cyclone tropical dans les 72h</p></div></div>
-        <div class="vig-row v-jaune" id="rowJaune"><i></i><div><b>Jaune</b><p>Cyclone possible dans les 72h</p></div></div>
-        <div class="vig-row v-orange" id="rowOrange"><i></i><div><b>Orange</b><p>Cyclone probable dans les 24h</p></div></div>
-        <div class="vig-row v-rouge" id="rowRouge"><i></i><div><b>Rouge</b><p>Cyclone imminent — restez chez vous</p></div></div>
-        <div class="vig-row v-violet" id="rowViolet"><i></i><div><b>Violet</b><p>Passage du cyclone sur l'île</p></div></div>
+        <div class="vig-row row-vert active" id="rowVert"><i></i><div><b>Vert</b><p>Pas de cyclone tropical dans les 72h</p></div></div>
+        <div class="vig-row row-jaune" id="rowJaune"><i></i><div><b>Jaune</b><p>Cyclone possible dans les 72h</p></div></div>
+        <div class="vig-row row-orange" id="rowOrange"><i></i><div><b>Orange</b><p>Cyclone probable dans les 24h</p></div></div>
+        <div class="vig-row row-rouge" id="rowRouge"><i></i><div><b>Rouge</b><p>Cyclone imminent — restez chez vous</p></div></div>
+        <div class="vig-row row-violet" id="rowViolet"><i></i><div><b>Violet</b><p>Passage du cyclone sur l'île</p></div></div>
       </div>
-      <div class="vig-ctas">
-        <div class="vc-card"><span class="vc-ico">🏠</span><h4>Inspection préventive</h4><p>Faites vérifier vos fixations avant la saison cyclonique.</p><a href="#contact" class="btn-main btn-sm">Prendre RDV</a></div>
-        <div class="vc-card vc-urg"><span class="vc-ico">🚨</span><h4>Urgence post-cyclone</h4><p>Bâchage et réparation. Intervention sous 24h après le passage.</p><a href="tel:+262692000000" class="btn-red btn-sm">Appeler maintenant</a></div>
+      <div class="vig-cards">
+        <div class="vig-card">
+          <span class="vig-card-ico">🏠</span>
+          <h4>Inspection préventive</h4>
+          <p>Avant la saison cyclonique, faites vérifier vos fixations. Diagnostic gratuit.</p>
+          <a href="#contact" class="btn-orange btn-sm">Prendre RDV</a>
+        </div>
+        <div class="vig-card vig-card-red">
+          <span class="vig-card-ico">🚨</span>
+          <h4>Urgence post-cyclone</h4>
+          <p>Bâchage, sécurisation et réparation. Intervention sous 24h après le passage.</p>
+          <a href="tel:+262692000000" class="btn-red btn-sm">Appeler maintenant</a>
+        </div>
       </div>
     </div>
-    <p class="vig-src">Source : <a href="https://meteofrance.re/fr/cyclone" target="_blank" rel="noopener">meteofrance.re</a></p>
+    <p class="vig-source">Source officielle : <a href="https://meteofrance.re/fr/cyclone" target="_blank" rel="noopener">meteofrance.re</a></p>
   </div>
 </section>
 
-<!-- AVIS -->
-<section id="avis" class="sec sec-dark">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow light">Témoignages</span>
-      <h2 class="wh">Ils nous font<br/><em>confiance</em></h2>
+<!-- ===== AVIS ===== -->
+<section id="avis" class="section section-dark">
+  <div class="container">
+    <div class="section-head">
+      <span class="label label-light">Témoignages</span>
+      <h2 class="white">Ce que disent nos clients</h2>
     </div>
-    <div class="testi-view">
+    <div class="testi-outer">
       <div class="testi-track" id="testiTrack">
-        <div class="testi-card"><div class="t-stars">★★★★★</div><p>"Intervention express après Belal. Toiture bâchée en moins de 24h. Sérieux, propre, prix correct."</p><div class="t-auth"><div class="t-av">MR</div><div><strong>Marie-Rose L.</strong><em>Saint-Pierre</em></div></div></div>
-        <div class="testi-card"><div class="t-stars">★★★★★</div><p>"Réfection complète bac acier. Chantier nickel, devis respecté à l'euro près. Je recommande sans hésiter."</p><div class="t-auth"><div class="t-av">JP</div><div><strong>Jean-Paul F.</strong><em>Saint-Denis</em></div></div></div>
-        <div class="testi-card"><div class="t-stars">★★★★★</div><p>"Peinture toiture + anti-mousse. Résultat impeccable, on dirait une toiture neuve. Très professionnel."</p><div class="t-auth"><div class="t-av">NS</div><div><strong>Nathalie S.</strong><em>Le Tampon</em></div></div></div>
-        <div class="testi-card"><div class="t-stars">★★★★★</div><p>"Zinguerie remplacée entièrement. Plus aucune infiltration depuis. Artisans ponctuels et très soigneux."</p><div class="t-auth"><div class="t-av">DB</div><div><strong>David B.</strong><em>Saint-Leu</em></div></div></div>
-        <div class="testi-card"><div class="t-stars">★★★★★</div><p>"Réfection avec isolation thermique. La maison est bien plus fraîche. Excellent rapport qualité-prix."</p><div class="t-auth"><div class="t-av">CR</div><div><strong>Christine R.</strong><em>Saint-André</em></div></div></div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Intervention express après le cyclone Belal. Toiture bâchée et sécurisée en moins de 24h. Sérieux, propre, prix correct. Je recommande !"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MR</div>
+            <div><strong>Marie-Rose L.</strong><em>Saint-Pierre</em></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Réfection complète de la toiture bac acier. Chantier nickel, devis respecté à l'euro près. Diagnostic gratuit très utile pour évaluer les dégâts."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">JP</div>
+            <div><strong>Jean-Paul F.</strong><em>Saint-Denis</em></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Peinture toiture + traitement anti-mousse. Résultat impeccable, on dirait une toiture neuve. Artisans très professionnels et à l'écoute."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">NS</div>
+            <div><strong>Nathalie S.</strong><em>Le Tampon</em></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Zinguerie remplacée entièrement. Plus aucune infiltration depuis l'intervention. Ponctuels et très soigneux. Top !"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DB</div>
+            <div><strong>David B.</strong><em>Saint-Leu</em></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Réfection avec isolation thermique. La maison est bien plus fraîche maintenant. Excellent rapport qualité-prix, je referai appel à eux."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">CR</div>
+            <div><strong>Christine R.</strong><em>Saint-André</em></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="testi-nav">
-      <button id="tPrev">‹</button>
+      <button id="tPrev" aria-label="Précédent">‹</button>
       <div id="tDots"></div>
-      <button id="tNext">›</button>
+      <button id="tNext" aria-label="Suivant">›</button>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="sec sec-light">
-  <div class="wrap contact-grid">
-    <div class="contact-left">
-      <span class="eyebrow">Contact</span>
-      <h2>Devis gratuit<br/><em>sous 48h</em></h2>
-      <p>Décrivez votre projet. Nous vous revenons avec un chiffrage précis, sans engagement.</p>
-      <div class="c-infos">
-        <a href="tel:+262692000000" class="c-info"><strong>📞</strong><span>0692 00 00 00</span></a>
-        <a href="mailto:contact@miraux-couvreur.re" class="c-info"><strong>✉</strong><span>contact@miraux-couvreur.re</span></a>
-        <div class="c-info"><strong>📍</strong><span>Toute l'île de La Réunion</span></div>
-        <div class="c-info"><strong>🕐</strong><span>Lun–Ven 7h–18h · Urgences 24h/24</span></div>
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <span class="label">Contactez-nous</span>
+      <h2>Devis &amp; Diagnostic<br/><span class="text-orange">Gratuit</span></h2>
+      <p>Décrivez votre projet. Nous nous déplaçons pour évaluer votre toiture sans frais et vous revenons sous 48h avec un devis précis.</p>
+      <div class="cinfo-list">
+        <a href="tel:+262692000000" class="cinfo-item">
+          <span class="cinfo-ico">📞</span><span>0692 00 00 00</span>
+        </a>
+        <a href="mailto:contact@miraux-couvreur.re" class="cinfo-item">
+          <span class="cinfo-ico">✉</span><span>contact@miraux-couvreur.re</span>
+        </a>
+        <div class="cinfo-item">
+          <span class="cinfo-ico">📍</span><span>Toute l'île de La Réunion</span>
+        </div>
+        <div class="cinfo-item">
+          <span class="cinfo-ico">🕐</span><span>Lun–Ven 7h–18h · Urgences 24h/24</span>
+        </div>
       </div>
     </div>
-    <form id="contactForm" class="cform" novalidate>
+    <form id="contactForm" novalidate>
+      <div class="form-badge">Devis &amp; Diagnostic <strong>GRATUIT</strong></div>
       <div class="form-row">
         <div class="fg"><label>Prénom *</label><input type="text" name="fname" placeholder="Jean" required/></div>
         <div class="fg"><label>Nom *</label><input type="text" name="lname" placeholder="Dupont" required/></div>
       </div>
       <div class="form-row">
         <div class="fg"><label>Téléphone *</label><input type="tel" name="phone" placeholder="0692 00 00 00" required/></div>
-        <div class="fg"><label>Commune *</label>
+        <div class="fg">
+          <label>Commune *</label>
           <select name="commune" required>
-            <option value="">Sélectionner...</option>
+            <option value="">Choisir...</option>
             <option>Saint-Denis</option><option>Saint-Paul</option><option>Saint-Pierre</option>
             <option>Le Tampon</option><option>Saint-André</option><option>Saint-Louis</option>
-            <option>Saint-Leu</option><option>Sainte-Marie</option><option>Saint-Benoît</option><option>Autre</option>
+            <option>Saint-Leu</option><option>Sainte-Marie</option><option>Saint-Benoît</option>
+            <option>Autre</option>
           </select>
         </div>
       </div>
-      <div class="fg"><label>Service *</label>
+      <div class="fg">
+        <label>Service souhaité *</label>
         <select name="service" required>
-          <option value="">Sélectionner...</option>
-          <option>Pose tôle bac acier</option><option>Peinture toiture</option>
-          <option>Réfection complète</option><option>Zinguerie</option>
-          <option>Urgence post-cyclone</option><option>Nettoyage toiture/façade</option><option>Inspection / autre</option>
+          <option value="">Choisir...</option>
+          <option>Pose tôle bac acier</option>
+          <option>Peinture toiture</option>
+          <option>Réfection complète</option>
+          <option>Zinguerie</option>
+          <option>Urgence post-cyclone</option>
+          <option>Nettoyage toiture / façade</option>
+          <option>Diagnostic toiture</option>
+          <option>Autre</option>
         </select>
       </div>
-      <div class="fg"><label>Description</label><textarea name="message" rows="3" placeholder="Surface, état actuel, urgence..."></textarea></div>
-      <button type="submit" class="btn-main btn-full">Envoyer ma demande →</button>
-      <p class="form-note">* Champs obligatoires · Réponse sous 48h garantie</p>
-      <div id="formSuccess" class="form-ok">
-        <div class="form-ok-ico">✓</div>
+      <div class="fg">
+        <label>Description du projet</label>
+        <textarea name="message" rows="4" placeholder="Surface approximative, état actuel de la toiture, urgence..."></textarea>
+      </div>
+      <button type="submit" class="btn-orange btn-full">Envoyer ma demande →</button>
+      <p class="form-note">✓ Devis gratuit · ✓ Diagnostic gratuit · ✓ Sans engagement · Réponse sous 48h</p>
+      <div id="formSuccess" class="form-success">
+        <div class="form-success-ico">✓</div>
         <strong>Demande envoyée !</strong>
-        <p>Nous vous recontactons dans les 48h.</p>
+        <p>Nous vous recontactons dans les 48h pour votre devis gratuit.</p>
       </div>
     </form>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ===== FOOTER ===== -->
 <footer id="footer">
-  <div class="foot-in">
+  <div class="container foot-grid">
     <div class="foot-brand">
-      <a href="#" class="logo"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><polygon points="16,2 30,12 2,12" fill="#E8520A"/><rect x="4" y="12" width="24" height="14" rx="1" fill="#C43F05"/><rect x="12" y="17" width="8" height="9" rx="1" fill="rgba(255,255,255,.2)"/></svg><span>MIRAUX <em>COUVREUR</em></span></a>
-      <p>Artisan couvreur depuis plus de 15 ans à La Réunion.</p>
+      <a href="#" class="logo">
+        <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
+          <polygon points="17,2 32,13 2,13" fill="#E8520A"/>
+          <rect x="5" y="13" width="24" height="15" rx="1" fill="#C43F05"/>
+          <rect x="12" y="18" width="10" height="10" rx="1" fill="rgba(255,255,255,.2)"/>
+        </svg>
+        <div>
+          <span class="logo-name">MIRAUX</span>
+          <span class="logo-sub">Couvreur · Réunion 974</span>
+        </div>
+      </a>
+      <p>Artisan couvreur depuis plus de 15 ans à La Réunion. Devis et diagnostic gratuits.</p>
     </div>
-    <div class="foot-col"><h4>Services</h4><ul><li>Pose tôle bac acier</li><li>Peinture toiture</li><li>Réfection complète</li><li>Zinguerie</li><li>Urgences cyclones</li><li>Nettoyage toiture</li></ul></div>
-    <div class="foot-col"><h4>Zones</h4><ul><li>Saint-Denis</li><li>Saint-Paul</li><li>Saint-Pierre</li><li>Le Tampon</li><li>Saint-André</li><li>Toute l'île</li></ul></div>
-    <div class="foot-col"><h4>Contact</h4><ul>
-      <li><a href="tel:+262692000000">0692 00 00 00</a></li>
-      <li><a href="mailto:contact@miraux-couvreur.re">contact@miraux-couvreur.re</a></li>
-      <li>Lun–Ven 7h–18h</li>
-      <li style="color:#f87171">Urgences 24h/24</li>
-    </ul></div>
+    <div class="foot-col">
+      <h4>Services</h4>
+      <ul>
+        <li>Pose tôle bac acier</li>
+        <li>Peinture toiture</li>
+        <li>Réfection complète</li>
+        <li>Zinguerie</li>
+        <li>Urgences cycloniques</li>
+        <li>Nettoyage toiture</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Zones</h4>
+      <ul>
+        <li>Saint-Denis</li>
+        <li>Saint-Paul</li>
+        <li>Saint-Pierre</li>
+        <li>Le Tampon</li>
+        <li>Saint-André</li>
+        <li>Toute l'île 974</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+262692000000">0692 00 00 00</a></li>
+        <li><a href="mailto:contact@miraux-couvreur.re">contact@miraux-couvreur.re</a></li>
+        <li>Lun–Ven 7h–18h</li>
+        <li class="urg-txt">Urgences 24h/24</li>
+      </ul>
+    </div>
   </div>
-  <div class="foot-bot">
-    <p>© 2025 MIRAUX Couvreur · La Réunion 974</p>
-    <p><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a></p>
+  <div class="foot-bottom">
+    <p>© 2025 MIRAUX Couvreur Réunion 974 · Tous droits réservés</p>
+    <p><a href="#">Mentions légales</a></p>
   </div>
 </footer>
 
-<a href="tel:+262692000000" id="fab" class="fab"><span class="fab-ring"></span>📞 Urgence</a>
+<!-- FAB -->
+<a href="tel:+262692000000" id="fab" class="fab">
+  <span class="fab-ring"></span>
+  <span>📞 Urgence</span>
+</a>
 
 <script src="assets/js/main.js"></script>
 </body>
