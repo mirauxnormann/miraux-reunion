@@ -8,8 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=4" />
 </head>
 <body>
 
@@ -409,13 +408,19 @@
     </div>
     <div class="map-meteo-grid">
 
-      <!-- CARTE -->
+      <!-- CARTE — iframe OpenStreetMap, marqueur Saint-Denis -->
       <div class="map-col">
         <div class="map-card">
-          <div id="reunionMap"></div>
+          <iframe
+            title="Localisation MIRAUX Toiture — La Réunion"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=55.15%2C-21.45%2C55.95%2C-20.75&amp;layer=mapnik&amp;marker=-20.8789%2C55.4481"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
           <div class="map-legend">
             <span class="map-pin-dot"></span>
-            <span>MIRAUX Toiture — Saint-Denis &amp; toute l'île 974</span>
+            <span>📍 MIRAUX Toiture — Saint-Denis · Zone d'intervention : toute l'île 974</span>
+            <a href="https://www.openstreetmap.org/?mlat=-20.8789&mlon=55.4481#map=11/-20.8789/55.4481" target="_blank" rel="noopener" class="map-osm-link">Voir en grand →</a>
           </div>
         </div>
       </div>
@@ -648,8 +653,7 @@
   <span class="fab-label">Urgence</span>
 </a>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/meteo.js"></script>
+<script src="assets/js/main.js?v=4"></script>
+<script src="assets/js/meteo.js?v=4"></script>
 </body>
 </html>

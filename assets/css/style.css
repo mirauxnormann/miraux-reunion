@@ -1239,25 +1239,31 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 32px rgba(0,119,182,.12);
   border: 1px solid rgba(0,119,182,.15);
 }
-#reunionMap {
-  height: 440px;
+.map-card iframe {
+  display: block;
   width: 100%;
-  background: #e8f4f8;
+  height: 420px;
+  border: none;
 }
 .map-legend {
   display: flex;
   align-items: center;
   gap: .6rem;
-  padding: .75rem 1rem;
+  padding: .7rem 1rem;
   background: #fff;
-  font-size: .8rem;
+  font-size: .78rem;
   color: var(--gray);
   border-top: 1px solid #e5e5e5;
+  flex-wrap: wrap;
 }
 .map-pin-dot {
   width: 10px; height: 10px; border-radius: 50%;
   background: var(--orange); flex-shrink: 0;
 }
+.map-osm-link {
+  margin-left: auto; color: var(--turquoise); font-weight: 600; font-size: .75rem;
+}
+.map-osm-link:hover { text-decoration: underline; }
 
 /* Marqueur Leaflet personnalisé */
 .lf-marker-wrap {

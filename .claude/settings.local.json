@@ -32,7 +32,13 @@
       "Bash(git show *)",
       "Bash(cp /tmp/v1_index.html \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\index.html\")",
       "Bash(cp /tmp/v1_style.css \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\assets\\\\css\\\\style.css\")",
-      "Bash(cp /tmp/v1_main.js \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\assets\\\\js\\\\main.js\")"
+      "Bash(cp /tmp/v1_main.js \"C:\\\\Users\\\\mirau\\\\miraux-reunion\\\\assets\\\\js\\\\main.js\")",
+      "Bash(curl -s -I \"https://miraux-reunion.pages.dev/\")",
+      "Bash(curl -sk \"https://miraux-reunion.pages.dev/\")",
+      "Bash(curl -sk \"https://miraux-reunion.pages.dev/\" -D -)",
+      "Bash(curl -sk \"https://miraux-reunion.pages.dev/assets/js/meteo.js\")",
+      "Bash(curl -sk \"https://miraux-reunion.pages.dev/assets/css/style.css\")",
+      "Bash(curl -sk \"https://api.open-meteo.com/v1/forecast?latitude=-20.8789&longitude=55.4481&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m,weather_code,precipitation&timezone=Indian%2FReunion&wind_speed_unit=kmh\")"
     ]
   }
 }
