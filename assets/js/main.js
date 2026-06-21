@@ -22,7 +22,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 
 /* ── SCROLL REVEAL ───────────────────────────────────────────────────────── */
 const revealEls = document.querySelectorAll(
-  '.service-card, .why-list li, .vig-action-card, .ba-slide, .section-header, .contact-info > *, .footer-col'
+  '.svc-row, .svc-mini-card, .gallery-fig, .why-list li, .vig-action-card, .ba-slide, .section-header, .contact-info > *, .footer-col'
 );
 revealEls.forEach(el => el.classList.add('reveal'));
 

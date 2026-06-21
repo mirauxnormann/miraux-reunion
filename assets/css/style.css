@@ -1486,3 +1486,208 @@ a { color: inherit; text-decoration: none; }
   .meteo-stats-grid { grid-template-columns: 1fr 1fr; }
   .meteo-temp { font-size: 2.2rem; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   STYLE PHOTO FLUID — lignes alternées services
+   ══════════════════════════════════════════════════════════════ */
+
+.img-fluid { width: 100%; display: block; height: auto; }
+
+/* ── LIGNES SERVICE ALTERNÉES ── */
+.svc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  padding: 5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.svc-row:last-of-type { border-bottom: none; }
+
+.svc-row-rev .svc-figure { order: 2; }
+.svc-row-rev .svc-body   { order: 1; }
+
+.svc-figure {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 56px rgba(0,119,182,.14);
+}
+.svc-figure .img-fluid {
+  height: 420px;
+  object-fit: cover;
+  transition: transform .7s ease;
+}
+.svc-figure:hover .img-fluid { transform: scale(1.04); }
+
+.svc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.svc-body .section-tag,
+.svc-body .btn { align-self: flex-start; }
+
+.svc-body h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+.svc-body > p { color: var(--gray); line-height: 1.8; font-size: 1rem; margin: 0; }
+
+.svc-check-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  margin: 0;
+  padding: 0;
+}
+.svc-check-list li {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .95rem;
+  color: var(--dark);
+}
+.svc-check-list li::before {
+  content: '✓';
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--turquoise), var(--turquoise-d));
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .65rem;
+  font-weight: 900;
+}
+
+/* ── MINI CARDS SERVICES COMPLÉMENTAIRES ── */
+.svc-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 4rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.svc-mini-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0,180,216,.08);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.svc-mini-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--turquoise), var(--turquoise-d));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--transition);
+}
+.svc-mini-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.svc-mini-card:hover::before { transform: scaleX(1); }
+.svc-mini-card.featured-mini {
+  border-color: rgba(230,57,70,.2);
+  background: linear-gradient(135deg, #fff8f8, #fff);
+}
+.svc-mini-card.featured-mini::before {
+  background: linear-gradient(90deg, #E63946, #c1121f);
+  transform: scaleX(1);
+}
+.svc-mini-badge {
+  position: absolute; top: 1rem; right: 1rem;
+  background: linear-gradient(135deg, #E63946, #c1121f);
+  color: white; font-size: .68rem; font-weight: 700;
+  letter-spacing: .1em; padding: .2rem .65rem; border-radius: 99px;
+}
+.svc-mini-icon { font-size: 2rem; margin-bottom: 1rem; line-height: 1; }
+.svc-mini-card h4 { font-size: 1.05rem; margin-bottom: .6rem; }
+.svc-mini-card p { color: var(--gray); font-size: .9rem; line-height: 1.65; margin-bottom: 1.1rem; }
+.svc-link       { color: var(--turquoise-d); font-weight: 700; font-size: .9rem; font-family: var(--font-head); }
+.svc-link:hover { color: var(--turquoise); }
+.svc-link-urgent       { color: #E63946; font-weight: 700; font-size: .9rem; font-family: var(--font-head); }
+.svc-link-urgent:hover { color: #c1121f; }
+
+/* ── WHY VISUAL PHOTO ── */
+.why-figure {
+  margin: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.why-figure img {
+  width: 100%; height: 500px;
+  object-fit: cover; display: block;
+}
+.why-photo-badge {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  background: rgba(255,255,255,.95);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--dark);
+  box-shadow: var(--shadow);
+}
+.why-photo-badge .wr-stars { color: #f59e0b; margin-bottom: .2rem; }
+
+/* ── GALERIE PHOTOS ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 280px;
+  gap: 1rem;
+}
+.gallery-fig {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.10);
+}
+.gallery-fig:nth-child(1),
+.gallery-fig:nth-child(4) { grid-column: span 2; }
+.gallery-fig img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .55s ease;
+}
+.gallery-fig:hover img { transform: scale(1.06); }
+
+/* ── BA REAL PHOTOS ── */
+.ba-visual-0-before {
+  background: url('../images/toiture-zinc-avant.jpg') center/cover no-repeat;
+}
+.ba-visual-0-before::after { display: none; }
+.ba-visual-0-after {
+  background: url('../images/toiture-zinc-apres.jpg') center/cover no-repeat;
+}
+.ba-visual-0-after::after { display: none; }
+
+/* ── RESPONSIVE NOUVEAUX BLOCS ── */
+@media (max-width: 1024px) {
+  .svc-row { gap: 3.5rem; }
+}
+@media (max-width: 900px) {
+  .svc-row { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0; }
+  .svc-row-rev .svc-figure { order: 0; }
+  .svc-row-rev .svc-body   { order: 0; }
+  .svc-figure .img-fluid { height: 260px; }
+  .svc-mini-grid { grid-template-columns: 1fr; }
+  .why-figure img { height: 340px; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 220px; }
+  .gallery-fig:nth-child(1),
+  .gallery-fig:nth-child(4) { grid-column: span 1; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+  .svc-figure .img-fluid { height: 220px; }
+}
