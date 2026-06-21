@@ -10,18 +10,18 @@ burger.addEventListener('click', () => navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
 /* SCROLL REVEAL */
-const io = new IntersectionObserver((entries) => {
+const revIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    setTimeout(() => e.target.classList.add('visible'), +e.target.dataset.delay || 0);
-    io.unobserve(e.target);
+    setTimeout(() => e.target.classList.add('on'), +e.target.dataset.delay || 0);
+    revIO.unobserve(e.target);
   });
 }, { threshold: .12 });
 
-document.querySelectorAll('.svc-card, .testi-card, .vc-card, .sh, .check-list li, .g-sm, .g-wide, .foot-col').forEach((el, i) => {
-  el.classList.add('reveal');
-  el.dataset.delay = (i % 4) * 80;
-  io.observe(el);
+document.querySelectorAll('.svc, .testi-card, .vc-card, .sec-head, .checks li, .g-a, .g-b, .foot-col').forEach((el, i) => {
+  el.classList.add('rev');
+  el.dataset.delay = (i % 4) * 75;
+  revIO.observe(el);
 });
 
 /* BEFORE / AFTER */
@@ -127,7 +127,7 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
     const pulse = document.getElementById('vigPulse');
     if (pulse) pulse.style.background = c.pulse;
     document.getElementById('vigDate').textContent =
-      'Mis à jour le ' + new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      'Mis à jour le ' + new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     document.querySelectorAll('.vig-row').forEach(r => r.classList.remove('active'));
     document.getElementById(c.row)?.classList.add('active');
   }
@@ -158,7 +158,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (!t) return;
     e.preventDefault();
-    window.scrollTo({ top: t.offsetTop - nav.offsetHeight - 12, behavior: 'smooth' });
+    window.scrollTo({ top: t.offsetTop - nav.offsetHeight - 10, behavior: 'smooth' });
   });
 });
 
