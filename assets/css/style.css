@@ -1664,11 +1664,11 @@ a { color: inherit; text-decoration: none; }
 
 /* ── BA REAL PHOTOS ── */
 .ba-visual-0-before {
-  background: url('../images/avant.avif') center/cover no-repeat;
+  background: url('../images/apres.avif') center/cover no-repeat;
 }
 .ba-visual-0-before::after { display: none; }
 .ba-visual-0-after {
-  background: url('../images/apres.avif') center/cover no-repeat;
+  background: url('../images/avant.avif') center/cover no-repeat;
 }
 .ba-visual-0-after::after { display: none; }
 
