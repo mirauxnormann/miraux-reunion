@@ -100,8 +100,8 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
     vert:   { label: 'VERT',   desc: 'Pas de vigilance particulière',          icon: '✓',  pulse: '#22c55e' },
     jaune:  { label: 'JAUNE',  desc: 'Cyclone tropical possible dans les 72h', icon: '⚠',  pulse: '#f59e0b' },
     orange: { label: 'ORANGE', desc: 'Cyclone probable dans les 24h',          icon: '⚡', pulse: '#f97316' },
-    rouge:  { label: 'ROUGE',  desc: 'Cyclone imminent — restez chez vous',    icon: '🔴', pulse: '#ef4444' },
-    violet: { label: 'VIOLET', desc: 'Passage du cyclone sur l\'île',          icon: '🌀', pulse: '#a855f7' },
+    rouge:  { label: 'ROUGE',  desc: 'Cyclone imminent — restez chez vous',    icon: '!',  pulse: '#ef4444' },
+    violet: { label: 'VIOLET', desc: 'Passage du cyclone sur l\'île',          icon: '~',  pulse: '#a855f7' },
   };
 
   function setVigilance(level) {
@@ -161,8 +161,8 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     vert:   { label:'VERT',   desc:'Pas de vigilance particulière',       icon:'✓',  pulse:'#22c55e' },
     jaune:  { label:'JAUNE',  desc:'Cyclone possible dans les 72h',       icon:'⚠',  pulse:'#f59e0b' },
     orange: { label:'ORANGE', desc:'Cyclone probable dans les 24h',       icon:'⚡', pulse:'#f97316' },
-    rouge:  { label:'ROUGE',  desc:'Cyclone imminent — restez chez vous', icon:'🔴', pulse:'#ef4444' },
-    violet: { label:'VIOLET', desc:'Passage du cyclone sur l\'île',       icon:'🌀', pulse:'#a855f7' },
+    rouge:  { label:'ROUGE',  desc:'Cyclone imminent — restez chez vous', icon:'!',  pulse:'#ef4444' },
+    violet: { label:'VIOLET', desc:'Passage du cyclone sur l\'île',       icon:'~',  pulse:'#a855f7' },
   };
 
   function setVigilance(level) {

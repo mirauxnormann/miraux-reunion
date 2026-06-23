@@ -9,24 +9,24 @@ var DEFAULT_LNG  =  55.4481;
 var DEFAULT_CITY = 'Saint-Denis (Réunion)';
 
 function wmoInfo(code) {
-  if (code === 0)  return { ico: '☀️', desc: 'Ciel dégagé' };
-  if (code <= 2)   return { ico: '🌤', desc: 'Peu nuageux' };
-  if (code === 3)  return { ico: '☁️', desc: 'Couvert' };
-  if (code <= 48)  return { ico: '🌫', desc: 'Brouillard' };
-  if (code <= 55)  return { ico: '🌦', desc: 'Bruine' };
-  if (code <= 67)  return { ico: '🌧', desc: 'Pluie' };
-  if (code <= 82)  return { ico: '🌧', desc: 'Averses' };
-  if (code === 95) return { ico: '⛈',  desc: 'Orage' };
-  if (code >= 96)  return { ico: '⛈',  desc: 'Orage violent' };
-  return                  { ico: '🌡',  desc: 'Variable' };
+  if (code === 0)  return { ico: '', desc: 'Ciel dégagé' };
+  if (code <= 2)   return { ico: '', desc: 'Peu nuageux' };
+  if (code === 3)  return { ico: '', desc: 'Couvert' };
+  if (code <= 48)  return { ico: '', desc: 'Brouillard' };
+  if (code <= 55)  return { ico: '', desc: 'Bruine' };
+  if (code <= 67)  return { ico: '', desc: 'Pluie' };
+  if (code <= 82)  return { ico: '', desc: 'Averses' };
+  if (code === 95) return { ico: '', desc: 'Orage' };
+  if (code >= 96)  return { ico: '', desc: 'Orage violent' };
+  return                  { ico: '', desc: 'Variable' };
 }
 
 function getAlert(wind, gusts, code) {
-  if (gusts >= 150 || wind >= 120) return { level:'violet', ico:'🌀', title:'CYCLONE EXTRÊME',    text:'Rafales > 150 km/h. Ne sortez pas !', banner:true };
-  if (gusts >= 100 || wind >= 80)  return { level:'rouge',  ico:'🔴', title:'VENT VIOLENT',       text:'Rafales > 100 km/h. Dégâts toiture possibles.', banner:true };
-  if (gusts >= 70  || wind >= 55)  return { level:'orange', ico:'⚠️', title:'VENT FORT',          text:'Rafales > 70 km/h. Vérifiez vos fixations.', banner:true };
-  if (gusts >= 50  || wind >= 40)  return { level:'jaune',  ico:'💨', title:'Vent soutenu',       text:'Rafales modérées — vigilance.', banner:false };
-  if (code >= 95)                   return { level:'orange', ico:'⛈',  title:'ORAGE EN COURS',    text:'Activité orageuse dans votre zone.', banner:true };
+  if (gusts >= 150 || wind >= 120) return { level:'violet', ico:'!', title:'CYCLONE EXTRÊME',    text:'Rafales > 150 km/h. Ne sortez pas !', banner:true };
+  if (gusts >= 100 || wind >= 80)  return { level:'rouge',  ico:'!', title:'VENT VIOLENT',       text:'Rafales > 100 km/h. Dégâts toiture possibles.', banner:true };
+  if (gusts >= 70  || wind >= 55)  return { level:'orange', ico:'!', title:'VENT FORT',          text:'Rafales > 70 km/h. Vérifiez vos fixations.', banner:true };
+  if (gusts >= 50  || wind >= 40)  return { level:'jaune',  ico:'~', title:'Vent soutenu',       text:'Rafales modérées — vigilance.', banner:false };
+  if (code >= 95)                   return { level:'orange', ico:'!', title:'ORAGE EN COURS',    text:'Activité orageuse dans votre zone.', banner:true };
   return null;
 }
 

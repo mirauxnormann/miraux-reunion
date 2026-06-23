@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=11" />
+  <link rel="stylesheet" href="assets/css/style.css?v=12" />
 </head>
 <body>
 
@@ -35,7 +35,7 @@
       <li><a href="#realisations">Réalisations</a></li>
       <li><a href="#localisation">Carte & Météo</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="tel:+262692000000" class="nav-cta">📞 Devis Gratuit</a></li>
+      <li><a href="tel:+262692000000" class="nav-cta">Devis Gratuit</a></li>
     </ul>
     <button class="burger" id="burger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -46,17 +46,11 @@
 <!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
 <section class="hero" id="home">
   <div class="hero-bg">
-    <div class="hero-ocean"></div>
-    <div class="hero-sky"></div>
-    <div class="volcano-silhouette"></div>
-    <div class="sun-glow"></div>
-    <div class="cloud c1"></div>
-    <div class="cloud c2"></div>
-    <div class="cloud c3"></div>
-    <div class="roof-line"></div>
+    <img class="hero-bg-photo" src="assets/images/23f35b32-a98f-4cec-8c70-6916fbcafde2.JPG" alt="Toiture bac acier La Réunion — MIRAUX Couvreur">
+    <div class="hero-overlay"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-badge">🌴 Artisan local — La Réunion</div>
+    <div class="hero-badge">Artisan local — La Réunion</div>
     <h1 class="hero-title">
       Votre toiture<br/>
       <em>à l'épreuve</em><br/>
@@ -160,20 +154,20 @@
     <!-- Services complémentaires -->
     <div class="svc-mini-grid">
       <div class="svc-mini-card">
-        <div class="svc-mini-icon">💧</div>
+        <div class="svc-mini-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></div>
         <h4>Zinguerie</h4>
         <p>Pose et remplacement de gouttières, descentes pluviales, noues et chéneaux en zinc, aluminium ou PVC.</p>
         <a href="#contact" class="svc-link">Devis gratuit →</a>
       </div>
       <div class="svc-mini-card featured-mini">
         <div class="svc-mini-badge">URGENCE 24h/24</div>
-        <div class="svc-mini-icon">🚨</div>
+        <div class="svc-mini-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
         <h4>Urgences post-cyclone</h4>
         <p>Bâchage d'urgence, sécurisation et remise en état prioritaire après passage cyclonique sur toute l'île.</p>
         <a href="tel:+262692000000" class="svc-link-urgent">Appeler maintenant →</a>
       </div>
       <div class="svc-mini-card">
-        <div class="svc-mini-icon">🏠</div>
+        <div class="svc-mini-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <h4>Nettoyage façade</h4>
         <p>Hydrojetting haute pression, traitement anti-algues et hydrofuge. Aspect neuf sous le soleil réunionnais.</p>
         <a href="#contact" class="svc-link">Devis gratuit →</a>
@@ -320,7 +314,7 @@
           ></iframe>
           <div class="map-legend">
             <span class="map-pin-dot"></span>
-            <span>📍 MIRAUX Toiture — Saint-Denis · Zone d'intervention : toute l'île 974</span>
+            <span>MIRAUX Toiture — Saint-Denis · Zone d'intervention : toute l'île 974</span>
             <a href="https://www.openstreetmap.org/?mlat=-20.8789&mlon=55.4481#map=11/-20.8789/55.4481" target="_blank" rel="noopener" class="map-osm-link">Voir en grand →</a>
           </div>
         </div>
@@ -343,7 +337,7 @@
                 <div class="meteo-city" id="meteoCity">—</div>
                 <div class="meteo-date" id="meteoDate">—</div>
               </div>
-              <div class="meteo-icon-big" id="meteoIcon">🌤</div>
+              <div class="meteo-icon-big" id="meteoIcon"></div>
             </div>
             <div class="meteo-temp-row">
               <span class="meteo-temp" id="meteoTemp">—°</span>
@@ -351,22 +345,22 @@
             </div>
             <div class="meteo-stats-grid">
               <div class="meteo-stat">
-                <span>💨</span><div><b id="meteoWind">—</b><small>Vent km/h</small></div>
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2"/><path d="M12.59 19.41A2 2 0 1 0 14 16H2"/><path d="M17.73 8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg></span><div><b id="meteoWind">—</b><small>Vent km/h</small></div>
               </div>
               <div class="meteo-stat">
-                <span>💧</span><div><b id="meteoHumidity">—</b><small>Humidité %</small></div>
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></span><div><b id="meteoHumidity">—</b><small>Humidité %</small></div>
               </div>
               <div class="meteo-stat">
-                <span>🌧</span><div><b id="meteoRain">—</b><small>Précip. mm</small></div>
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0018 7h-1.26A8 8 0 104 15.25"/></svg></span><div><b id="meteoRain">—</b><small>Précip. mm</small></div>
               </div>
               <div class="meteo-stat">
-                <span>🌪</span><div><b id="meteoGusts">—</b><small>Rafales km/h</small></div>
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2"/><path d="M17.73 8.27A2.5 2.5 0 1 1 19.5 12H2"/><path d="M12.59 19.41A2 2 0 1 0 14 16H2"/></svg></span><div><b id="meteoGusts">—</b><small>Rafales km/h</small></div>
               </div>
             </div>
             <!-- Vigilance cyclonique intégrée -->
             <div class="vig-inline">
               <div class="vig-inline-header">
-                <span>🌀 Vigilance cyclonique</span>
+                <span>Vigilance cyclonique</span>
                 <a href="https://meteofrance.re/fr/cyclone" target="_blank" rel="noopener" class="vig-inline-src">meteofrance.re ↗</a>
               </div>
               <div class="vig-inline-body">
@@ -404,7 +398,7 @@
 
           <!-- Erreur géoloc -->
           <div class="meteo-error" id="meteoError" style="display:none">
-            <span class="meteo-error-ico">📍</span>
+            <span class="meteo-error-ico"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
             <p>Autorisez la géolocalisation pour voir la météo de votre ville</p>
             <button onclick="loadMeteo()" class="btn btn-sm btn-primary">Détecter ma position</button>
           </div>
@@ -426,28 +420,28 @@
         <p class="light">Décrivez-nous votre projet, nous vous revenons rapidement avec un devis personnalisé et sans engagement.</p>
         <div class="contact-details">
           <div class="contact-item">
-            <div class="contact-icon">📞</div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.7a16 16 0 006.29 6.29l1.06-1.34a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
             <div>
               <strong>Téléphone</strong>
               <a href="tel:+262692000000">0692 00 00 00</a>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">📧</div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div>
               <strong>Email</strong>
               <a href="mailto:contact@miraux-toiture.re">contact@miraux-toiture.re</a>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">📍</div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div>
               <strong>Zone d'intervention</strong>
               <span>Toute l'île de La Réunion</span>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">🕐</div>
+            <div class="contact-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div>
               <strong>Horaires</strong>
               <span>Lun–Ven 7h–18h | Urgences 24h/24</span>
@@ -576,11 +570,11 @@
 <!-- ─── URGENCE FLOTTANT ──────────────────────────────────────────────────── -->
 <a href="tel:+262692000000" class="urgence-fab" id="urgenceFab" aria-label="Appel urgent">
   <span class="fab-ring"></span>
-  <span class="fab-icon">📞</span>
+  <svg class="fab-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.7a16 16 0 006.29 6.29l1.06-1.34a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
   <span class="fab-label">Urgence</span>
 </a>
 
-<script src="assets/js/main.js?v=11"></script>
-<script src="assets/js/meteo.js?v=11"></script>
+<script src="assets/js/main.js?v=12"></script>
+<script src="assets/js/meteo.js?v=12"></script>
 </body>
 </html>
