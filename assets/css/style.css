@@ -144,6 +144,9 @@ a { color: inherit; text-decoration: none; }
   height: 42px;
   width: auto;
   display: block;
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: none;
 }
 .logo-text {
   font-size: 1.15rem;
@@ -327,6 +330,9 @@ a { color: inherit; text-decoration: none; }
   width: auto;
   display: block;
   flex-shrink: 0;
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: none;
 }
 .hero-brand-name {
   font-family: var(--font-head);
