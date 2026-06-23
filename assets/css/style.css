@@ -1657,25 +1657,26 @@ a { color: inherit; text-decoration: none; }
 
 /* ── GALERIE PHOTOS ── */
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  align-items: start;
+  columns: 3;
+  column-gap: 1.25rem;
 }
 .gallery-fig {
-  margin: 0;
-  border-radius: 14px;
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,.10);
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+  transition: box-shadow var(--transition);
 }
-.gallery-fig:nth-child(1),
-.gallery-fig:nth-child(4) { grid-column: span 2; }
+.gallery-fig:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,.22);
+}
 .gallery-fig img {
   width: 100%; height: auto;
   display: block;
-  transition: transform .55s ease;
+  transition: transform .6s ease;
 }
-.gallery-fig:hover img { transform: scale(1.06); }
+.gallery-fig:hover img { transform: scale(1.04); }
 
 /* ── BA REAL PHOTOS ── */
 .ba-img {
@@ -1700,11 +1701,9 @@ a { color: inherit; text-decoration: none; }
   .svc-figure .img-fluid { height: 260px; }
   .svc-mini-grid { grid-template-columns: 1fr; }
   .why-figure img { height: 340px; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
-  .gallery-fig:nth-child(1),
-  .gallery-fig:nth-child(4) { grid-column: span 1; }
+  .gallery-grid { columns: 2; }
 }
 @media (max-width: 480px) {
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid { columns: 1; }
   .svc-figure .img-fluid { height: 220px; }
 }
