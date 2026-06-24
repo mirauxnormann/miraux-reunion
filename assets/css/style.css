@@ -1213,20 +1213,30 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 768px) {
+  /* Désactiver backdrop-filter sur mobile — il empêche position:fixed de fonctionner */
+  #navbar.scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
   .nav-links {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
     background: var(--dark);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    z-index: 999;
+    gap: 2.5rem;
+    z-index: 9998;
+    /* reset desktop styles */
+    width: 100vw !important;
+    justify-content: center !important;
   }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 1.3rem; }
-  .burger { display: flex; z-index: 1000; position: relative; }
+  .burger { display: flex; z-index: 9999; position: relative; }
 
   .services-grid { grid-template-columns: 1fr; }
   .contact-grid  { grid-template-columns: 1fr; }
