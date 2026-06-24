@@ -128,27 +128,14 @@ function reverseGeocode(lat, lng, cb) {
 }
 
 function loadMeteo() {
-  hide('meteoLoading');
+  show('meteoLoading');
   hide('meteoContent');
   hide('meteoError');
 
   if (!navigator.geolocation) {
-    // Pas de géoloc dispo → direct Saint-Denis
-    show('meteoLoading');
-    hide('meteoGeoPrompt');
     fetchMeteo(DEFAULT_LAT, DEFAULT_LNG, DEFAULT_CITY);
     return;
   }
-
-  // Montrer le prompt (iOS exige un geste utilisateur avant la demande géoloc)
-  show('meteoGeoPrompt');
-}
-
-function requestGeoAndLoad() {
-  hide('meteoGeoPrompt');
-  show('meteoLoading');
-  hide('meteoContent');
-  hide('meteoError');
 
   navigator.geolocation.getCurrentPosition(
     function(pos) {
@@ -165,17 +152,7 @@ function requestGeoAndLoad() {
   );
 }
 
-function loadMeteoDefault() {
-  hide('meteoGeoPrompt');
-  show('meteoLoading');
-  hide('meteoContent');
-  hide('meteoError');
-  fetchMeteo(DEFAULT_LAT, DEFAULT_LNG, DEFAULT_CITY);
-}
-
-window.loadMeteo        = loadMeteo;
-window.requestGeoAndLoad = requestGeoAndLoad;
-window.loadMeteoDefault  = loadMeteoDefault;
+window.loadMeteo = loadMeteo;
 
 // Démarrer
 loadMeteo();
