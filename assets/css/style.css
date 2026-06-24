@@ -128,7 +128,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .logo {
   display: flex;
@@ -337,11 +337,11 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 .hero-brand-name {
-  font-family: var(--font-head);
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  font-weight: 900;
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
   color: white;
-  letter-spacing: .06em;
+  letter-spacing: .12em;
   line-height: 1;
   text-shadow: 0 2px 24px rgba(0,0,0,.6);
 }
