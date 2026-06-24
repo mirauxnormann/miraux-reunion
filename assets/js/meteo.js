@@ -145,10 +145,16 @@ function loadMeteo() {
         fetchMeteo(lat, lng, city);
       });
     },
-    function() {
-      fetchMeteo(DEFAULT_LAT, DEFAULT_LNG, DEFAULT_CITY + ' (défaut)');
+    function(err) {
+      hide('meteoLoading');
+      // Code 1 = permission refusée → afficher conseil iOS
+      if (err && err.code === 1) {
+        var hint = el('meteoErrorHint');
+        if (hint) hint.style.display = 'block';
+      }
+      show('meteoError');
     },
-    { timeout: 8000, maximumAge: 120000 }
+    { timeout: 10000, maximumAge: 60000 }
   );
 }
 

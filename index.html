@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=29" />
+  <link rel="stylesheet" href="assets/css/style.css?v=30" />
 </head>
 <body>
 
@@ -401,8 +401,9 @@
           <!-- Erreur géoloc -->
           <div class="meteo-error" id="meteoError" style="display:none">
             <span class="meteo-error-ico"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <p>Autorisez la géolocalisation pour voir la météo de votre ville</p>
-            <button onclick="loadMeteo()" class="btn btn-sm btn-primary">Détecter ma position</button>
+            <p id="meteoErrorMsg">Autorisez la géolocalisation pour voir la météo de votre ville</p>
+            <p class="meteo-error-hint" id="meteoErrorHint" style="display:none">Sur iPhone : Réglages → Confidentialité → Service de localisation → Safari → "Lors de l'utilisation"</p>
+            <button onclick="loadMeteo()" class="btn btn-sm btn-primary">Réessayer</button>
           </div>
 
         </div>
@@ -576,7 +577,7 @@
   <span class="fab-label">Urgence</span>
 </a>
 
-<script src="assets/js/main.js?v=29"></script>
-<script src="assets/js/meteo.js?v=29"></script>
+<script src="assets/js/main.js?v=30"></script>
+<script src="assets/js/meteo.js?v=30"></script>
 </body>
 </html>

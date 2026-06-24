@@ -334,9 +334,9 @@ a { color: inherit; text-decoration: none; }
 .hero-brand {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  flex-wrap: nowrap;
 }
 .hero-logo-img {
   height: 200px;
@@ -1249,10 +1249,10 @@ a { color: inherit; text-decoration: none; }
   .hero-actions .btn { text-align: center; justify-content: center; }
   .contact-form { padding: 1.5rem; }
   h2 { font-size: 1.6rem; }
-  .hero-logo-img { height: 120px; }
-  .hero-brand-name { font-size: 1.9rem; }
-  .hero-brand-sub { font-size: .85rem; letter-spacing: .2em; }
-  .hero-content { padding: 7rem 1.25rem 3rem; }
+  .hero-logo-img { height: 90px; }
+  .hero-brand-name { font-size: 1.7rem; }
+  .hero-brand-sub { font-size: .8rem; letter-spacing: .15em; }
+  .hero-content { padding: 5rem 1.25rem 2.5rem; }
   .gallery-grid { columns: 1; }
 }
 
@@ -1499,6 +1499,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray); font-size: .88rem;
 }
 .meteo-error-ico { font-size: 2.5rem; }
+.meteo-error-hint { font-size: .78rem; color: var(--turquoise-d); background: rgba(0,180,216,.08); border-radius: 8px; padding: .6rem .9rem; line-height: 1.5; }
 
 /* ── VIGILANCE INLINE ── */
 .vig-inline {
