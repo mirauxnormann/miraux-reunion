@@ -45,7 +45,8 @@
       "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1 | Select-Object -Last 12)",
       "PowerShell(cd C:\\\\Users\\\\mirau\\\\miraux-reunion; $env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy . --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1)",
       "PowerShell($env:NODE_OPTIONS=\"--use-system-ca\"; npx wrangler pages deploy C:\\\\Users\\\\mirau\\\\miraux-reunion --project-name=miraux-reunion --branch=main --commit-dirty=true 2>&1)",
-      "PowerShell(Copy-Item *)"
+      "PowerShell(Copy-Item *)",
+      "PowerShell(ls \"C:\\\\Users\\\\mirau\\\\Desktop\\\\miraux reunion couvreur\\\\\")"
     ]
   }
 }
