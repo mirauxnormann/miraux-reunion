@@ -191,6 +191,47 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   setVigilance('vert');
 })();
 
+/* ── CHANTIERS EN COURS CAROUSEL ─────────────────────────────────────────── */
+(function() {
+  const track  = document.getElementById('chantierTrack');
+  const dotsEl = document.getElementById('chantierDots');
+  const prev   = document.getElementById('chantierPrev');
+  const next   = document.getElementById('chantierNext');
+  if (!track) return;
+
+  const cards = track.querySelectorAll('.chantier-card');
+  const total = cards.length;
+  let idx = 0, startX = 0, isDragging = false;
+
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'chantier-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Photo ${i + 1}`);
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    idx = (n + total) % total;
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dotsEl.querySelectorAll('.chantier-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  prev.addEventListener('click', () => goTo(idx - 1));
+  next.addEventListener('click', () => goTo(idx + 1));
+
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+  track.addEventListener('touchmove',  () => {}, { passive: true });
+  track.addEventListener('touchend',   e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? idx + 1 : idx - 1);
+  });
+
+  setInterval(() => goTo(idx + 1), 5000);
+})();
+
 /* ── SMOOTH ANCHOR LINKS ─────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
