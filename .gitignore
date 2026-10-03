@@ -3,3 +3,7 @@ Thumbs.db
 *.log
 node_modules/
 .env
+
+# Fichiers des outils (Claude Code, Wrangler) - jamais en ligne
+.claude/
+.wrangler/
