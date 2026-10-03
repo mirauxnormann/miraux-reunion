@@ -144,15 +144,51 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
       valid = false;
     }
   });
+  const emailField = this.querySelector('#email');
+  emailField.style.borderColor = '';
+  if (emailField.value.trim() && !emailField.checkValidity()) {
+    emailField.style.borderColor = '#ef4444';
+    valid = false;
+  }
   if (!valid) return;
 
-  const btn = this.querySelector('.btn');
+  const form = this;
+  const btn = form.querySelector('.btn');
+  const btnText = btn.querySelector('.btn-text');
+  const errorEl = document.getElementById('formError');
   btn.disabled = true;
-  btn.querySelector('.btn-text').textContent = 'Envoi en cours…';
+  btnText.textContent = 'Envoi en cours…';
+  errorEl.classList.remove('show');
 
-  setTimeout(() => {
-    document.getElementById('formSuccess').classList.add('show');
-  }, 1200);
+  // Envoi de la demande par email via FormSubmit (site statique, pas de serveur)
+  const data = Object.fromEntries(new FormData(form));
+  fetch('https://formsubmit.co/ajax/mirauxrenovation@gmail.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _subject: `Demande de devis — ${data.service} — ${data.fname} ${data.lname}`,
+      _template: 'table',
+      _honey: data._honey,
+      ...(data.email && { _replyto: data.email }),
+      'Prénom': data.fname,
+      'Nom': data.lname,
+      'Email': data.email || '—',
+      'Téléphone': data.phone,
+      'Commune': data.commune,
+      'Service': data.service,
+      'Description': data.message || '—'
+    })
+  })
+    .then(r => r.json())
+    .then(res => {
+      if (res.success !== 'true' && res.success !== true) throw new Error(res.message);
+      document.getElementById('formSuccess').classList.add('show');
+    })
+    .catch(() => {
+      btn.disabled = false;
+      btnText.textContent = 'Envoyer ma demande';
+      errorEl.classList.add('show');
+    });
 });
 
 /* ── VIGILANCE CYCLONIQUE ────────────────────────────────────────────────── */
@@ -211,11 +247,33 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     dotsEl.appendChild(d);
   });
 
+  // Le cadre prend le format de la photo affichée (verticale ou horizontale)
+  const carousel = track.parentElement;
+  function fitFrame() {
+    const img = cards[idx].querySelector('img');
+    if (!img.naturalWidth) return;
+    const ratio = img.naturalWidth / img.naturalHeight;
+    const maxW  = Math.min(680, carousel.parentElement.clientWidth);
+    const maxH  = window.innerHeight * 0.75;
+    const w = Math.min(maxW, maxH * ratio);
+    carousel.style.aspectRatio = 'auto';
+    carousel.style.width  = `${w}px`;
+    carousel.style.height = `${w / ratio}px`;
+  }
+  cards.forEach((card, i) => {
+    const img = card.querySelector('img');
+    img.loading = 'eager';
+    img.addEventListener('load', () => { if (i === idx) fitFrame(); });
+  });
+  window.addEventListener('resize', fitFrame);
+
   function goTo(n) {
     idx = (n + total) % total;
     track.style.transform = `translateX(-${idx * 100}%)`;
     dotsEl.querySelectorAll('.chantier-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    fitFrame();
   }
+  fitFrame();
 
   prev.addEventListener('click', () => goTo(idx - 1));
   next.addEventListener('click', () => goTo(idx + 1));
@@ -230,6 +288,20 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   });
 
   setInterval(() => goTo(idx + 1), 5000);
+})();
+
+/* ── MAQUETTE 3D : hauteur du cadre = hauteur de son contenu ─────────────── */
+(function() {
+  const frame = document.getElementById('toit3dFrame');
+  if (!frame) return;
+  frame.addEventListener('load', () => {
+    let doc;
+    try { doc = frame.contentDocument; } catch (e) { return; }
+    if (!doc || !doc.body) return;
+    const fit = () => { frame.style.height = doc.documentElement.scrollHeight + 'px'; };
+    new ResizeObserver(fit).observe(doc.body);
+    fit();
+  });
 })();
 
 /* ── SMOOTH ANCHOR LINKS ─────────────────────────────────────────────────── */

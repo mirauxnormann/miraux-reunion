@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toiture 3D – La Réunion</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--surface-1:#f4f3ee;--text:#1f1e1b;--text-secondary:#6b6a64;--border:#cfcdc4;--border-accent:#2b6cb0;--radius:8px}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.toit3d{max-width:900px;margin:0 auto;padding:16px}
+.toit3d .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.toit3d button{font:inherit}
+.toit3d .btns button{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;letter-spacing:.03em;padding:11px 12px;background:transparent;color:#0077B6;border:2px solid #0077B6;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .3s,color .3s}
+.toit3d .btns button:hover{background:#0077B6;color:#fff}
+.toit3d .btns button.actif{background:#0077B6;color:#fff;border:2px solid #0077B6}
+.toit3d .dot{width:16px;height:16px;border-radius:2px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.toit3d #wrap{width:100%;height:420px;border-radius:12px;overflow:hidden;background:var(--surface-1)}
+.toit3d #status{font-size:13px;color:var(--text-secondary);margin:8px 0 0}
+.toit3d .note{font-size:12px;color:var(--text-secondary);margin:8px 0 0}
+.toit3d .infos{border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:14px;background:#fff}
+.toit3d .infos:empty{display:none}
+.toit3d .infos h2{font-size:18px;font-weight:600;margin:0 0 6px}
+.toit3d .infos .intro{font-size:15px;line-height:1.55;margin:0 0 12px}
+.toit3d .faits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.toit3d .fait{background:var(--surface-1);border-radius:var(--radius);padding:8px 10px}
+.toit3d .fait b{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:2px}
+.toit3d .fait span{font-size:14px}
+.toit3d .infos ul{margin:0;padding-left:18px;font-size:14px;line-height:1.55}
+.toit3d .infos li{margin-bottom:6px}
+@media (min-width:700px){.toit3d .btns{grid-template-columns:repeat(4,minmax(0,1fr))}.toit3d #wrap{height:540px}.toit3d .faits{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="toit3d">
+<div class="btns">
+<button data-m="tole"><span class="dot" style="background:conic-gradient(#8e3a2c 0 50%,#a24636 0)"></span>Tôle ondulée</button>
+<button data-m="bac"><span class="dot" style="background:conic-gradient(#4b5257 0 50%,#5a6166 0)"></span>Bac acier</button>
+<button data-m="bardeau"><span class="dot" style="background:conic-gradient(#8b7a64 0 25%,#6f604f 0 50%,#a08f74 0 75%,#7c6c58 0)"></span>Bardeaux bois</button>
+<button id="replay">&#8635; Rejouer la pose</button>
+</div>
+<div id="wrap"></div>
+<p id="status">Chargement…</p>
+<section class="infos" id="infos"></section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+if(typeof THREE==='undefined'){document.getElementById('status').textContent="La 3D n'a pas pu se charger. Vérifiez votre connexion et rechargez la page.";throw new Error('Three.js indisponible');}
+const V=THREE.Vector3;
+const status=document.getElementById('status');
+let fail=false,ready=false;
+window.addEventListener('error',e=>{if(fail||ready)return;fail=true;status.textContent='Un problème est survenu avec la maquette 3D. Rechargez la page.';});
+let _s=1;function seed(n){_s=n>>>0;}
+function rnd(){_s=(_s+0x6D2B79F5)>>>0;let t=_s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296;}
+
+/* ---------- Scène ---------- */
+const wrap=document.getElementById('wrap');
+let renderer;try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});}catch(e){fail=true;status.textContent="Votre navigateur ne permet pas d'afficher la 3D. Essayez avec un navigateur à jour.";throw e;}
+renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();status.textContent='La 3D a été mise en pause par le navigateur. Rechargez la page pour la relancer.';});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+wrap.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(40,1,0.1,200);
+const camT=new V(-1.8,4.1,0),camD=new V(-7.7,4.3,7.5);
+function placeCam(){const k=Math.max(.85,1.15/camera.aspect);camera.position.copy(camT).addScaledVector(camD,k);camera.lookAt(camT);}
+function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();placeCam();}
+resize();window.addEventListener('resize',resize);
+scene.add(new THREE.HemisphereLight(0xfff8ee,0x6f6a5c,0.6));
+const sun=new THREE.DirectionalLight(0xfffaf0,1.0);sun.position.set(-9,15,8);sun.target.position.set(-2,4,0);scene.add(sun);scene.add(sun.target);
+sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-7,right:7,top:7,bottom:-7,near:1,far:45});sun.shadow.bias=-0.0004;sun.shadow.normalBias=0.02;
+
+/* ---------- Textures ---------- */
+const S=512;
+function noiseGen(sd,n){seed(sd);const g=new Float32Array(n*n);for(let i=0;i<n*n;i++)g[i]=rnd();const sm=t=>t*t*(3-2*t);
+return(x,y)=>{x=((x%n)+n)%n;y=((y%n)+n)%n;const x0=Math.floor(x),y0=Math.floor(y),x1=(x0+1)%n,y1=(y0+1)%n,fx=sm(x-x0),fy=sm(y-y0);
+const a=g[y0*n+x0],b=g[y0*n+x1],c=g[y1*n+x0],d=g[y1*n+x1];return a+(b-a)*fx+(c-a)*fy+(a-b-c+d)*fx*fy;};}
+function fbm(N,x,y,o){let v=0,a=.5,f=1,t=0;for(let i=0;i<o;i++){v+=a*N(x*f,y*f);t+=a;a*=.5;f*=2;}return v/t;}
+const cl=v=>v<0?0:v>1?1:v;
+function tex(fn,rx,ry){const cv=document.createElement('canvas');cv.width=cv.height=S;const ctx=cv.getContext('2d');const im=ctx.createImageData(S,S),d=im.data,o=[0,0,0];
+for(let y=0;y<S;y++)for(let x=0;x<S;x++){fn(x,y,o);const k=(y*S+x)*4;d[k]=o[0]*255;d[k+1]=o[1]*255;d[k+2]=o[2]*255;d[k+3]=255;}
+ctx.putImageData(im,0,0);const t=new THREE.CanvasTexture(cv);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;t.repeat.set(rx||1,ry||1);return t;}
+const TX={};
+{seed(1);const N=noiseGen(11,32),N2=noiseGen(12,4);
+TX.metal=tex((x,y,o)=>{const L=.94+(fbm(N,x/S*32,y/S*32,2)-.5)*.05+(fbm(N2,x/S*4,y/S*4,2)-.5)*.06+(rnd()-.5)*.02;o[0]=o[1]=o[2]=cl(L);},1,1);
+const Nw=noiseGen(21,16),Nk=noiseGen(22,64);
+TX.wood=tex((x,y,o)=>{const u=x/S,v=y/S;const g=.5+.5*Math.sin(u*90+fbm(Nw,u*4,v*3,3)*10);const k=fbm(Nk,u*64,v*6,2);let L=(.78+.22*g)*(.9+.1*k);if(v>.965)L*=.6;o[0]=cl(L);o[1]=cl(L*.96);o[2]=cl(L*.9);});
+const Nc=noiseGen(31,16);
+TX.charp=tex((x,y,o)=>{const u=x/S,v=y/S;const s=.5+.5*Math.sin(u*60+fbm(Nc,u*4,v*12,3)*12);const L=.8+.2*s;o[0]=cl(.72*L);o[1]=cl(.55*L);o[2]=cl(.36*L);});}
+
+/* ---------- Pan de toiture ---------- */
+const W=7,hw=4,rise=2.4,H=3,p=Math.atan2(rise,hw),L=Math.hypot(hw,rise),ov=.35,c=Math.cos(p),s=Math.sin(p),LL=L+ov;
+function panGroup(){const g=new THREE.Group();g.matrixAutoUpdate=false;const x=new V(0,0,1),y=new V(c,s,0),z=new V(-s,c,0),o=new V(-hw,H,-W/2);
+g.matrix.makeBasis(x,y,z);g.matrix.setPosition(o.addScaledVector(y,-ov));return g;}
+const charpMat=new THREE.MeshStandardMaterial({map:TX.charp,roughness:.85});
+const steel=new THREE.MeshStandardMaterial({color:0xc4c8cc,metalness:.75,roughness:.3});
+const epdm=new THREE.MeshStandardMaterial({color:0x1d1e20,roughness:.8});
+const mousse=new THREE.MeshStandardMaterial({color:0x2a2b2d,roughness:1});
+const COL={tole:0x8e3a2c,bac:0x4b5257};
+const ZP=.15,HP=.08,ZS=ZP+HP; /* dessus des chevrons, hauteur des pannes, dessous de la couverture */
+
+const C={
+tole:{nom:'Tôle ondulée',sub:'pannes resserrées en rive, fixations en sommet d\'onde, rives, closoirs et faîtière crantée'},
+bac:{nom:'Bac acier',sub:'toutes les nervures fixées sur chaque panne, rives, closoirs et faîtière'},
+bardeau:{nom:'Bardeaux bois',sub:'liteaux, rangée de départ doublée, pose à joints décalés, planches de rive et de faîtage'}};
+
+/* ---------- Fiches ---------- */
+const INFO={
+tole:{titre:'La tôle ondulée',intro:"C'est la couverture la plus répandue à La Réunion : légère, rapide à poser et économique. En zone cyclonique, sa tenue au vent dépend avant tout de la qualité des fixations et de la charpente qui la porte.",
+faits:[["Épaisseur","0,75 mm minimum en zone cyclonique"],["Profil","Onde de 76 × 18 mm"],["Pannes","≤ 0,80 m en partie courante, ≤ 0,40 m en bordure"],["Référence","Règles paracycloniques et recommandations « climat tropical »"]],
+points:["Fixation en sommet d'onde, jamais en creux, avec cavalier, rondelle d'étanchéité EPDM et vis ou tirefond adapté à la panne.","Densité renforcée : une onde sur trois en partie courante, une onde sur deux en rive, à l'égout, au faîtage et aux recouvrements.","Pannes resserrées en bordure de toiture, là où l'arrachement par le vent est le plus fort.","Débord à l'égout limité à 10 cm sans renfort de charpente. Pas de débord latéral libre.","Faîtière crantée et closoirs en mousse pour fermer les ondes, accessoires fixés au moins tous les 30 cm.","En bord de mer, privilégier l'aluminium ou l'inox, plus résistants aux embruns."]},
+bac:{titre:'Le bac acier',intro:"Tôle nervurée à profil trapézoïdal, le bac acier offre une grande rigidité et un rendu plus contemporain. Il couvre de grandes longueurs d'un seul tenant, sans recouvrement transversal.",
+faits:[["Épaisseur","0,75 mm minimum en zone cyclonique"],["Largeur utile","Environ 1 m par plaque"],["Fixation","Toutes les nervures, sur chaque panne"],["Norme","DTU 40.35 + règles paracycloniques"]],
+points:["En zone cyclonique, toutes les nervures sont fixées à chaque panne, en sommet de nervure.","Recouvrement latéral d'une nervure, posé dans le sens opposé aux vents dominants.","Pannes resserrées en rive, à l'égout et au faîtage.","Closoirs en mousse au profil du bac sous la faîtière, pour bloquer l'eau et les insectes.","Faîtière et bandes de rive fixées au moins tous les 30 cm."]},
+bardeau:{titre:'Les bardeaux bois',intro:"Couverture traditionnelle des cases créoles, faite de petites planchettes de bois fendues et clouées. On la retrouve sur les cases patrimoniales et les maisons des Hauts.",
+faits:[["Pose","Sur liteaux, en trois épaisseurs"],["Fixation","Clous inox ou cuivre"],["Pente","Forte pour bien évacuer l'eau"],["Entretien","Contrôle régulier et remplacement à l'unité"]],
+points:["Chaque bardeau recouvre les deux tiers du précédent : trois épaisseurs de bois assurent l'étanchéité.","Joints décalés d'un rang à l'autre, comme pour l'ardoise.","Rangée de départ doublée à l'égout.","Rives et faîtage traités par des planches de bois.","Souvent rénovée en tôle aujourd'hui ; en secteur protégé, la restauration à l'identique peut être demandée par l'Architecte des Bâtiments de France."]}};
+const infosBox=document.getElementById('infos');
+function renderInfos(key){const f=INFO[key];
+infosBox.innerHTML='<h2>'+f.titre+'</h2><p class="intro">'+f.intro+'</p><div class="faits">'+f.faits.map(x=>'<div class="fait"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('')+'</div><ul>'+f.points.map(x=>'<li>'+x+'</li>').join('')+'</ul><p class="note">Valeurs indicatives : elles varient selon l\'exposition au vent, la région et le fabricant. Votre couvreur vous conseille au cas par cas.</p>';}
+
+/* ---------- Animation ---------- */
+let root=null,A=null,current='tole';
+const dummy=new THREE.Object3D(),M4=new THREE.Matrix4();
+function newAnim(){return{grows:[],drops:[],pops:[],sets:[],end:0,start:performance.now(),done:false};}
+const ease=e=>1-Math.pow(1-e,3);
+function step(){if(!A||A.done)return;const t=(performance.now()-A.start)/1000;
+for(const g of A.grows){const e=Math.min(1,Math.max(0,(t-g.d)/g.dur));g.obj.scale[g.ax]=e>0?e:.0001;}
+for(const d of A.drops){const e=Math.min(1,Math.max(0,(t-d.d)/(d.dur||.45)));const q=ease(e);d.obj.position.copy(d.base).addScaledVector(d.dir,1-q);d.obj.scale.setScalar(e>0?1:.0001);}
+for(const st of A.sets){let ch=false;st.data.forEach((d,i)=>{if(d.ok)return;const e=Math.min(1,Math.max(0,(t-d.d)/.35));const q=ease(e);
+dummy.position.set(d.x,d.v+(1-q)*.3,d.z+(1-q)*.7);dummy.rotation.set(d.rot-(1-q)*.6,0,0);
+if(e>0)dummy.scale.set(d.sx,1,1);else dummy.scale.setScalar(.0001);dummy.updateMatrix();st.im.setMatrixAt(i,dummy.matrix);ch=true;if(e>=1)d.ok=1;});
+if(ch)st.im.instanceMatrix.needsUpdate=true;}
+const touched=new Set();
+for(const pp of A.pops){if(pp.ok)continue;const e=Math.min(1,Math.max(0,(t-pp.d)/.25));const q=ease(e);
+dummy.position.set(pp.x,pp.y,pp.z+(1-q)*.12);dummy.rotation.set(0,0,(1-q)*6);if(e>0)dummy.scale.setScalar(1);else dummy.scale.setScalar(.0001);dummy.updateMatrix();
+for(const im of pp.ims){im.setMatrixAt(pp.i,dummy.matrix);touched.add(im);}if(e>=1)pp.ok=1;}
+touched.forEach(im=>im.instanceMatrix.needsUpdate=true);
+if(t>A.end)A.done=true;}
+
+/* ---------- Éléments communs ---------- */
+function structure(g,pannesY,tP){
+for(let x=.1;x<W;x+=.9){const ch=new THREE.Mesh(new THREE.BoxGeometry(.07,LL,.15),charpMat);ch.position.set(Math.min(x,W-.1),LL/2,.075);g.add(ch);}
+pannesY.forEach((y,j)=>{const geo=new THREE.BoxGeometry(W+.06,.06,HP);geo.translate((W+.06)/2,0,0);
+const pn=new THREE.Mesh(geo,charpMat);pn.position.set(-.03,y,ZP+HP/2);pn.scale.x=.0001;g.add(pn);A.grows.push({obj:pn,ax:'x',d:tP+j*.16,dur:.35});});
+return tP+pannesY.length*.16+.4;}
+function pannes(){const ys=[.05,.45];let y=.45+.8;const top=LL-.45;while(y<top-.25){ys.push(y);y+=.8;}ys.push(top,LL-.05);return ys;}
+function screwSet(g,n){const head=new THREE.CylinderGeometry(.0065,.0065,.009,6);head.rotateX(Math.PI/2);head.translate(0,0,.009);
+const wash=new THREE.CylinderGeometry(.011,.011,.004,16);wash.rotateX(Math.PI/2);wash.translate(0,0,.003);
+const cav=new THREE.BoxGeometry(.024,.03,.005);cav.translate(0,0,.0005);
+const ims=[new THREE.InstancedMesh(cav,steel,n),new THREE.InstancedMesh(wash,epdm,n),new THREE.InstancedMesh(head,steel,n)];
+ims.forEach(im=>{for(let i=0;i<n;i++)im.setMatrixAt(i,M4.makeScale(.0001,.0001,.0001));g.add(im);});return ims;}
+
+/* ---------- Tôle ondulée et bac acier ---------- */
+function profileSheet(fz,w,len,seg){const geo=new THREE.PlaneGeometry(w,len,seg,1);const P=geo.attributes.position,U=geo.attributes.uv;
+for(let i=0;i<P.count;i++){const x=P.getX(i)+w/2,y=P.getY(i)+len/2;P.setXYZ(i,x,y,fz(x));U.setXY(i,x,y);}geo.computeVertexNormals();return geo;}
+function buildMetal(key){
+const g=panGroup();root.add(g);const ys=pannes();
+const tS=structure(g,ys,0);
+const mat=new THREE.MeshStandardMaterial({map:TX.metal,color:COL[key],metalness:.28,roughness:.42,side:THREE.DoubleSide});
+const y0=-.08,len=LL-.05-y0;
+let fz,period,step,nUnit,crestsOf,amp,seg;
+if(key==='tole'){const lam=.076;amp=.018;period=lam;nUnit=11;step=10*lam;fz=x=>amp/2*(1-Math.cos(2*Math.PI*x/lam));
+crestsOf=n=>Array.from({length:n},(_,k)=>lam/2+k*lam);seg=10;}
+else{const P=.25,top=.015,base=.04;amp=.035;period=P;nUnit=4;step=4*P;
+fz=x=>{const u=((x%P)+P)%P,d=Math.min(u,P-u);return d<top?amp:d<base?amp*(base-d)/(base-top):(Math.abs(d-.09)<.004?.003:0);};
+crestsOf=n=>Array.from({length:n+1},(_,k)=>k*P);seg=60;}
+const sheets=[];for(let x0=-.03,i=0;x0<W+.03-.05;x0+=step,i++){let n=nUnit;const rem=(W+.03-x0)/period;if(rem<n)n=Math.ceil(rem);sheets.push({x0,n,i});}
+const crestTotal=sheets.reduce((a,sh)=>a+crestsOf(sh.n).length,0);
+const ims=screwSet(g,crestTotal*ys.length+200);let si=0;
+const tSh=.55;
+sheets.forEach((sh,i)=>{const w=sh.n*period+(key==='bac'?.0:0);
+const geo=profileSheet(fz,w,len,sh.n*seg);const m=new THREE.Mesh(geo,mat);const zl=ZS+.003+i*.0016;
+m.position.set(sh.x0,y0,zl);g.add(m);const d=tS+i*tSh;A.drops.push({obj:m,base:m.position.clone(),dir:new V(0,0,.7),d,dur:.5});m.scale.setScalar(.0001);
+const cr=crestsOf(sh.n);const last=sheets.length-1;
+ys.forEach((y,j)=>{const edgeRow=j<=1||j>=ys.length-2;
+cr.forEach((cx,k)=>{let fix;
+if(key==='bac'){fix=!(k===cr.length-1&&i<last);}
+else{if(k===cr.length-1&&i<last)fix=false;else if(k===0&&i>0)fix=true;else{const edge=edgeRow||i===0||i===last;fix=k%(edge?2:3)===0||(k===cr.length-1&&i===last);}}
+if(!fix||sh.x0+cx>W+.02)return;
+A.pops.push({ims,i:si++,x:sh.x0+cx,y,z:zl+amp+.0005,d:d+.45+j*.05+k*.004});});});});
+const tEnd=tS+sheets.length*tSh+.9;
+/* rives */
+for(const ed of [0,1]){const rv=new THREE.Group(),xe=ed?W+.035:-.035,sg=ed?1:-1;
+const face=new THREE.Mesh(new THREE.BoxGeometry(.006,LL+.04,.13),mat);face.position.set(xe,LL/2-.02,ZS-.01);rv.add(face);
+const fl=new THREE.Mesh(new THREE.BoxGeometry(.09,LL+.04,.006),mat);fl.position.set(xe-sg*.042,LL/2-.02,ZS+amp+.03);rv.add(fl);
+const lip=new THREE.Mesh(new THREE.BoxGeometry(.006,LL+.04,.03),mat);lip.position.set(xe-sg*.084,LL/2-.02,ZS+amp+.016);rv.add(lip);
+g.add(rv);A.drops.push({obj:rv,base:rv.position.clone(),dir:new V(0,0,.6),d:tEnd+ed*.25});rv.scale.setScalar(.0001);
+for(let y=.15;y<LL-.05;y+=.3)A.pops.push({ims,i:si++,x:xe-sg*.042,y,z:ZS+amp+.033,d:tEnd+.5+ed*.25+y*.06});}
+/* closoir mousse + faîtière */
+const tF=tEnd+1.4;
+const clo=new THREE.Mesh(profileSheet(x=>fz(x)+.002,W+.06,.06,Math.round((W+.06)/period)*seg/ (key==='tole'?1:1)),mousse);
+clo.position.set(-.03,LL-.2,ZS+.012);clo.scale.z=1;g.add(clo);A.drops.push({obj:clo,base:clo.position.clone(),dir:new V(0,0,.4),d:tF});clo.scale.setScalar(.0001);
+const ft=new THREE.Group();
+const pl=new THREE.Mesh(new THREE.BoxGeometry(W+.1,.32,.006),mat);pl.position.set(W/2,LL-.1,ZS+amp+.03);ft.add(pl);
+const roll=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,W+.1,16,1,false,0,Math.PI),mat);roll.rotation.z=Math.PI/2;roll.rotation.x=Math.PI/2;roll.position.set(W/2,LL+.06,ZS+amp+.03);ft.add(roll);
+if(key==='tole'){const lam=period,nt=Math.floor((W+.08)/lam);const crG=new THREE.BoxGeometry(lam*.6,.035,.012);
+for(let k=0;k<nt;k++){const t_=new THREE.Mesh(crG,mat);t_.position.set(-.04+lam/2+k*lam,LL-.27,ZS+amp+.022);ft.add(t_);}}
+g.add(ft);A.drops.push({obj:ft,base:ft.position.clone(),dir:new V(0,.3,.6),d:tF+.5});ft.scale.setScalar(.0001);
+for(let x=.1;x<W;x+=.3)A.pops.push({ims,i:si++,x,y:LL-.12,z:ZS+amp+.034,d:tF+1.1+x*.05});
+A.end=tF+1.6+W*.05+.4;
+return sheets.length;}
+
+/* ---------- Bardeaux bois ---------- */
+function buildBardeau(){
+const g=panGroup();root.add(g);
+const l=.38,pu=.125,n=Math.ceil((LL-l)/pu-1e-3)+1,vb=r=>Math.min(r*pu,LL-l);
+const ys=[];for(let r=0;r<n;r++)ys.push(vb(r)+l-.03);
+for(let x=.1;x<W;x+=.6){const ch=new THREE.Mesh(new THREE.BoxGeometry(.07,LL,.15),charpMat);ch.position.set(Math.min(x,W-.1),LL/2,.075);g.add(ch);}
+const lg=new THREE.BoxGeometry(W+.06,.05,.025);lg.translate((W+.06)/2,0,0);
+ys.forEach((y,j)=>{const lm=new THREE.Mesh(lg,charpMat);lm.position.set(-.03,y,ZP+.0125);lm.scale.x=.0001;g.add(lm);A.grows.push({obj:lm,ax:'x',d:j*(1.3/n),dur:.25});});
+const zT=ZP+.025+.008,rot=-Math.atan2(.012,pu)*.8;
+const mats=[0,1].map(()=>new THREE.MeshStandardMaterial({map:TX.wood,roughness:.92}));
+const geo=new THREE.BoxGeometry(.1,l,.012);
+const pal=['#8b7a64','#7c6c58','#97866d','#6f604f','#a08f74','#84735d'];
+const data=[[],[]];const tB=1.6,dB=4.2;
+const row=(r,v,z,dd)=>{let x=-.03;let i=0;while(x<W+.03-.02){let w=.08+rnd()*.09;if(x+w>W+.03)w=W+.03-x;if(w<.03)break;
+data[(rnd()*2)|0].push({x:x+w/2,sx:(w-.006)/.1,v,z,rot,d:dd+i*.004,c:pal[(rnd()*pal.length)|0]});x+=w;i++;}};
+row(-1,l/2-.06,zT-.01,tB);
+for(let r=0;r<n;r++)row(r,vb(r)+l/2,zT,tB+.25+r*(dB/n));
+let total=0;const col=new THREE.Color();
+data.forEach((arr,k)=>{const im=new THREE.InstancedMesh(geo,mats[k],arr.length);arr.forEach((d,i)=>{im.setMatrixAt(i,M4.makeScale(.0001,.0001,.0001));col.set(d.c);im.setColorAt(i,col);});
+g.add(im);A.sets.push({im,data:arr});total+=arr.length;});
+const tE=tB+.25+dB+.6;
+const plank=new THREE.MeshStandardMaterial({map:TX.wood,color:0x8a7862,roughness:.9});
+for(const ed of [0,1]){const pr=new THREE.Mesh(new THREE.BoxGeometry(.025,LL+.04,.2),plank);pr.position.set(ed?W+.045:-.045,LL/2-.02,zT-.04);g.add(pr);
+A.drops.push({obj:pr,base:pr.position.clone(),dir:new V(0,0,.6),d:tE+ed*.25});pr.scale.setScalar(.0001);}
+const f1=new THREE.Mesh(new THREE.BoxGeometry(W+.12,.2,.025),plank);f1.position.set(W/2,LL-.06,zT+.03);g.add(f1);
+A.drops.push({obj:f1,base:f1.position.clone(),dir:new V(0,.3,.6),d:tE+.8});f1.scale.setScalar(.0001);
+const f2=new THREE.Mesh(new THREE.BoxGeometry(W+.12,.025,.12),plank);f2.position.set(W/2,LL+.04,zT+.06);g.add(f2);
+A.drops.push({obj:f2,base:f2.position.clone(),dir:new V(0,.3,.6),d:tE+1.2});f2.scale.setScalar(.0001);
+A.end=tE+2;
+return total;}
+
+/* ---------- Construction ---------- */
+function build(key){
+seed(key==='tole'?501:key==='bac'?502:503);
+if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material&&o.material!==charpMat&&o.material!==steel&&o.material!==epdm&&o.material!==mousse)[].concat(o.material).forEach(m=>m.dispose());});}
+root=new THREE.Group();scene.add(root);A=newAnim();
+let n;if(key==='bardeau'){n=buildBardeau();}else{n=buildMetal(key);}
+root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
+A.start=performance.now();current=key;
+status.textContent=C[key].nom+' : '+C[key].sub+'. '+n+(key==='bardeau'?' bardeaux posés.':' plaques posées.');
+renderInfos(key);
+document.querySelectorAll('[data-m]').forEach(bt=>bt.classList.toggle('actif',bt.dataset.m===key));}
+document.querySelectorAll('[data-m]').forEach(bt=>bt.onclick=()=>build(bt.dataset.m));
+document.getElementById('replay').onclick=()=>build(current);
+build('tole');ready=true;
+(function loop(){requestAnimationFrame(loop);step();renderer.render(scene,camera);})();
+</script>
+</body>
+</html>
