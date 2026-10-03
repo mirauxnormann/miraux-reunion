@@ -298,7 +298,8 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     let doc;
     try { doc = frame.contentDocument; } catch (e) { return; }
     if (!doc || !doc.body) return;
-    const fit = () => { frame.style.height = doc.documentElement.scrollHeight + 'px'; };
+    // body et non documentElement : la hauteur du html ne descend jamais sous celle du cadre
+    const fit = () => { frame.style.height = doc.body.scrollHeight + 'px'; };
     new ResizeObserver(fit).observe(doc.body);
     fit();
   });
